@@ -5,7 +5,7 @@ import com.company.marketplace.entity.TradingNetwork;
 
 @UiController("marketplace_TradingNetwork.browse")
 @UiDescriptor("trading-network-browse.xml")
-@LookupComponent("table")
+@LookupComponent("tradingNetworksTable")
 @LoadDataBeforeShow
-public class TradingNetworkBrowse extends MasterDetailScreen<TradingNetwork> {
+public class TradingNetworkBrowse extends StandardLookup<TradingNetwork> {
 }

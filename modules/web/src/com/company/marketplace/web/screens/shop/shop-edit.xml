@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://shopEdit.caption"
+        focusComponent="tab"
+        messagesPack="com.company.marketplace.web.screens.shop">
+    <data>
+        <instance id="shopDc"
+                  class="com.company.marketplace.entity.Shop">
+            <view extends="_local">
+                <property name="tradingNetwork" view="_minimal"/>
+            </view>
+            <loader/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <tabSheet>
+            <tab id="tab" caption="msg://tab" margin="true"
+                 spacing="true">
+                <form id="form" dataContainer="shopDc">
+                    <textField id="nameField" property="name"/>
+                    <textField id="numberField" property="number"/>
+                    <pickerField id="tradingNetworkField" property="tradingNetwork">
+                        <actions>
+                            <action id="lookup" type="picker_lookup"/>
+                            <action id="clear" type="picker_clear"/>
+                        </actions>
+                    </pickerField>
+                </form>
+                <hbox id="editActions" spacing="true">
+                    <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+                    <button id="closeBtn" action="windowClose"/>
+                </hbox>
+            </tab>
+
+        </tabSheet>
+    </layout>
+</window>

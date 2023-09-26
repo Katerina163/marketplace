@@ -5,7 +5,7 @@ import com.company.marketplace.entity.Product;
 
 @UiController("marketplace_Product.browse")
 @UiDescriptor("product-browse.xml")
-@LookupComponent("table")
+@LookupComponent("productsTable")
 @LoadDataBeforeShow
-public class ProductBrowse extends MasterDetailScreen<Product> {
+public class ProductBrowse extends StandardLookup<Product> {
 }
