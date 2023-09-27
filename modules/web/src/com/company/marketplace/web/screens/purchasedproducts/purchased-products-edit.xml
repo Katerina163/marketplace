@@ -7,7 +7,9 @@
         <instance id="purchasedProductsDc"
                   class="com.company.marketplace.entity.PurchasedProducts">
             <view extends="_local">
-                <property name="shop" view="_minimal"/>
+                <property name="shop" view="_minimal">
+                    <property name="products"/>
+                </property>
                 <property name="product" view="_minimal"/>
             </view>
             <loader/>
@@ -24,7 +26,7 @@
                         <action id="clear" type="picker_clear"/>
                     </actions>
                 </pickerField>
-                <pickerField id="productField" property="product">
+                <pickerField id="productField" property="shop.products">
                     <actions>
                         <action id="lookup" type="picker_lookup"/>
                         <action id="clear" type="picker_clear"/>

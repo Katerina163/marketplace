@@ -19,7 +19,6 @@ public class SoldProduct extends StandardEntity {
     private static final long serialVersionUID = -8284431251793090384L;
 
     @NotNull
-    @OnDeleteInverse(DeletePolicy.CASCADE)
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;

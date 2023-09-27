@@ -1,6 +1,5 @@
 package com.company.marketplace.entity;
 
-import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
@@ -17,10 +16,13 @@ public class PurchasedProducts extends StandardEntity {
     private static final long serialVersionUID = -3228353320184570900L;
 
     @NotNull
-    @OnDeleteInverse(DeletePolicy.DENY)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "SHOP_ID")
     private Shop shop;
+
+    @NotNull
+    @Column(name = "PRICE", nullable = false)
+    private BigDecimal price;
 
     @NotNull
     @OnDeleteInverse(DeletePolicy.DENY)
@@ -32,9 +34,8 @@ public class PurchasedProducts extends StandardEntity {
     @Column(name = "QUANTITY")
     private Long quantity;
 
-    @MetaProperty(related = {"product"})
     public BigDecimal getPrice() {
-        return product.getPrice();
+        return price;
     }
 
     public Long getQuantity() {

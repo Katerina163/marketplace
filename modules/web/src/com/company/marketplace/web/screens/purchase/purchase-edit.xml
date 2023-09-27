@@ -8,7 +8,7 @@
                   class="com.company.marketplace.entity.Purchase">
             <view extends="_local">
                 <property name="shop" view="_minimal"/>
-                <property name="products" view="_minimal"/>
+                <property name="products" view="_base"/>
                 <property name="numberProducts"/>
             </view>
             <loader/>
