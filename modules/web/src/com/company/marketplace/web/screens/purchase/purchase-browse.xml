@@ -1,53 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://shopBrowse.caption"
-        focusComponent="shopsTable"
-        messagesPack="com.company.marketplace.web.screens.shop">
+        caption="msg://purchaseBrowse.caption"
+        focusComponent="purchasesTable"
+        messagesPack="com.company.marketplace.web.screens.purchase">
     <data readOnly="true">
-        <collection id="shopsDc"
-                    class="com.company.marketplace.entity.Shop">
+        <collection id="purchasesDc"
+                    class="com.company.marketplace.entity.Purchase">
             <view extends="_local">
+                <property name="shop" view="_minimal"/>
                 <property name="products" view="_minimal"/>
-                <property name="address" view="_minimal"/>
-                <property name="tradingNetwork" view="_minimal"/>
+                <property name="numberProducts"/>
             </view>
-            <loader id="shopsDl">
+            <loader id="purchasesDl">
                 <query>
-                    <![CDATA[select e from marketplace_Shop e]]>
+                    <![CDATA[select e from marketplace_Purchase e]]>
                 </query>
             </loader>
         </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="shopsTable"
+    <layout expand="purchasesTable"
             spacing="true">
         <filter id="filter"
-                applyTo="shopsTable"
-                dataLoader="shopsDl">
+                applyTo="purchasesTable"
+                dataLoader="purchasesDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="shopsTable"
+        <groupTable id="purchasesTable"
                     width="100%"
-                    dataContainer="shopsDc">
+                    dataContainer="purchasesDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="number"/>
-                <column id="type"/>
-                <column id="name"/>
-                <column id="tradingNetwork"/>
+                <column id="shop"/>
+                <column id="numberProducts"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="shopsTable.create"/>
-                <button id="editBtn" action="shopsTable.edit"/>
-                <button id="removeBtn" action="shopsTable.remove"/>
+                <button id="createBtn" action="purchasesTable.create"/>
+                <button id="editBtn" action="purchasesTable.edit"/>
+                <button id="removeBtn" action="purchasesTable.remove"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">

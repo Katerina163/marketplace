@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
+        caption="msg://priceHistoryBrowse.caption"
+        focusComponent="priceHistoriesTable"
+        messagesPack="com.company.marketplace.web.screens.pricehistory">
+    <data readOnly="true">
+        <collection id="priceHistoriesDc"
+                    class="com.company.marketplace.entity.PriceHistory">
+            <view extends="_local">
+                <property name="product" view="_minimal"/>
+                <property name="shop" view="_minimal"/>
+            </view>
+            <loader id="priceHistoriesDl">
+                <query>
+                    <![CDATA[select e from marketplace_PriceHistory e]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout expand="priceHistoriesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="priceHistoriesTable"
+                dataLoader="priceHistoriesDl">
+            <properties include=".*"/>
+        </filter>
+        <groupTable id="priceHistoriesTable"
+                    width="100%"
+                    dataContainer="priceHistoriesDc">
+            <actions>
+                <action id="create" type="create"/>
+                <action id="edit" type="edit"/>
+                <action id="remove" type="remove"/>
+            </actions>
+            <columns>
+                <column id="product"/>
+                <column id="shop"/>
+                <column id="datePriceChange"/>
+            </columns>
+            <rowsCount/>
+        </groupTable>
+        <hbox id="lookupActions" spacing="true" visible="false">
+            <button action="lookupSelectAction"/>
+            <button action="lookupCancelAction"/>
+        </hbox>
+    </layout>
+</window>

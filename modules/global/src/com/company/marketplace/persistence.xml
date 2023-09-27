@@ -10,5 +10,6 @@
         <class>com.company.marketplace.entity.Address</class>
         <class>com.company.marketplace.entity.PriceHistory</class>
         <class>com.company.marketplace.entity.SoldProduct</class>
+        <class>com.company.marketplace.entity.PurchasedProducts</class>
     </persistence-unit>
 </persistence>

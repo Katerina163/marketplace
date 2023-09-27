@@ -1,53 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         xmlns:c="http://schemas.haulmont.com/cuba/screen/jpql_condition.xsd"
-        caption="msg://shopBrowse.caption"
-        focusComponent="shopsTable"
-        messagesPack="com.company.marketplace.web.screens.shop">
+        caption="msg://purchasedProductsBrowse.caption"
+        focusComponent="purchasedProductsesTable"
+        messagesPack="com.company.marketplace.web.screens.purchasedproducts">
     <data readOnly="true">
-        <collection id="shopsDc"
-                    class="com.company.marketplace.entity.Shop">
+        <collection id="purchasedProductsesDc"
+                    class="com.company.marketplace.entity.PurchasedProducts">
             <view extends="_local">
-                <property name="products" view="_minimal"/>
-                <property name="address" view="_minimal"/>
-                <property name="tradingNetwork" view="_minimal"/>
+                <property name="shop" view="_minimal"/>
+                <property name="product" view="_minimal"/>
             </view>
-            <loader id="shopsDl">
+            <loader id="purchasedProductsesDl">
                 <query>
-                    <![CDATA[select e from marketplace_Shop e]]>
+                    <![CDATA[select e from marketplace_PurchasedProducts e]]>
                 </query>
             </loader>
         </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="shopsTable"
+    <layout expand="purchasedProductsesTable"
             spacing="true">
         <filter id="filter"
-                applyTo="shopsTable"
-                dataLoader="shopsDl">
+                applyTo="purchasedProductsesTable"
+                dataLoader="purchasedProductsesDl">
             <properties include=".*"/>
         </filter>
-        <groupTable id="shopsTable"
+        <groupTable id="purchasedProductsesTable"
                     width="100%"
-                    dataContainer="shopsDc">
+                    dataContainer="purchasedProductsesDc">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="number"/>
-                <column id="type"/>
-                <column id="name"/>
-                <column id="tradingNetwork"/>
+                <column id="shop"/>
+                <column id="product"/>
+                <column id="price"/>
+                <column id="quantity"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
                           alwaysVisible="true">
-                <button id="createBtn" action="shopsTable.create"/>
-                <button id="editBtn" action="shopsTable.edit"/>
-                <button id="removeBtn" action="shopsTable.remove"/>
+                <button id="createBtn" action="purchasedProductsesTable.create"/>
+                <button id="editBtn" action="purchasedProductsesTable.edit"/>
+                <button id="removeBtn" action="purchasedProductsesTable.remove"/>
             </buttonsPanel>
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
