@@ -1,4 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
 
+    <view entity="marketplace_SoldProduct" name="view-soldProduct-with-shop" extends="_local">
+        <property name="product" fetch="JOIN" view="_minimal"/>
+        <property name="shop" view="_minimal"/>
+    </view>
 </views>
