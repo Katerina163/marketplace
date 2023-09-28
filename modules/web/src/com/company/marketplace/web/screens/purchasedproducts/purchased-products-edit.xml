@@ -7,13 +7,26 @@
         <instance id="purchasedProductsDc"
                   class="com.company.marketplace.entity.PurchasedProducts">
             <view extends="_local">
-                <property name="shop" view="_minimal">
-                    <property name="products"/>
-                </property>
+                <property name="shop" view="_minimal"/>
                 <property name="product" view="_minimal"/>
             </view>
             <loader/>
         </instance>
+        <collection id="productDc"
+                    class="com.company.marketplace.entity.SoldProduct" view="_local">
+            <loader id="productsDc">
+                <query>
+                    <![CDATA[select e from marketplace_SoldProduct e]]>
+                    <condition>
+                        <and>
+                            <jpql>
+                                <where>e.shop = :shop</where>
+                            </jpql>
+                        </and>
+                    </condition>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
@@ -26,7 +39,7 @@
                         <action id="clear" type="picker_clear"/>
                     </actions>
                 </pickerField>
-                <pickerField id="productField" property="shop.products">
+                <pickerField id="productField" dataContainer="productDc" property="product">
                     <actions>
                         <action id="lookup" type="picker_lookup"/>
                         <action id="clear" type="picker_clear"/>
