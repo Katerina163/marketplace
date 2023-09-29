@@ -9,6 +9,7 @@
                     class="com.company.marketplace.entity.SoldProduct">
             <view extends="_local">
                 <property name="product" view="_minimal"/>
+                <property name="shop" view="_minimal"/>
             </view>
             <loader id="soldProductsDl">
                 <query>
@@ -35,17 +36,11 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
+                <column id="shop"/>
                 <column id="product"/>
                 <column id="price"/>
-                <column id="quantity"/>
             </columns>
             <rowsCount/>
-<!--            <buttonsPanel id="buttonsPanel"-->
-<!--                          alwaysVisible="true">-->
-<!--                <button id="createBtn" action="soldProductsTable.create"/>-->
-<!--                <button id="editBtn" action="soldProductsTable.edit"/>-->
-<!--                <button id="removeBtn" action="soldProductsTable.remove"/>-->
-<!--            </buttonsPanel>-->
         </groupTable>
         <hbox id="lookupActions" spacing="true" visible="false">
             <button action="lookupSelectAction"/>

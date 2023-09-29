@@ -2,13 +2,14 @@ package com.company.marketplace.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
-import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
+@PublishEntityChangedEvents
 @Table(name = "MARKETPLACE_PURCHASED_PRODUCTS")
 @Entity(name = "marketplace_PurchasedProducts")
 @NamePattern("%s  %s|product,quantity")
@@ -20,30 +21,41 @@ public class PurchasedProducts extends StandardEntity {
     @JoinColumn(name = "SHOP_ID")
     private Shop shop;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "BASKET_ID")
+    private Basket basket;
+
     @NotNull
     @Column(name = "PRICE", nullable = false)
     private BigDecimal price;
 
-    @NotNull
-    @OnDeleteInverse(DeletePolicy.DENY)
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PRODUCT_ID")
     private SoldProduct product;
 
     @NotNull
+    @Positive
     @Column(name = "QUANTITY")
-    private Long quantity;
+    private Integer quantity;
 
-    public BigDecimal getPrice() {
-        return price;
+    public Basket getBasket() {
+        return basket;
     }
 
-    public Long getQuantity() {
+    public void setBasket(Basket basket) {
+        this.basket = basket;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     public SoldProduct getProduct() {
@@ -60,5 +72,9 @@ public class PurchasedProducts extends StandardEntity {
 
     public void setShop(Shop shop) {
         this.shop = shop;
+    }
+
+    public BigDecimal getPrice() {
+        return price;
     }
 }

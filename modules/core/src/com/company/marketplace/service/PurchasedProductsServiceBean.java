@@ -1,0 +1,23 @@
+package com.company.marketplace.service;
+
+import com.company.marketplace.entity.PurchasedProducts;
+import org.springframework.stereotype.Service;
+
+@Service(PurchasedProductsService.NAME)
+public class PurchasedProductsServiceBean implements PurchasedProductsService {
+
+    @Override
+    public boolean checkingQuantityProducts(PurchasedProducts product) {
+        return product.getProduct().getQuantity() >= product.getQuantity();
+    }
+
+    @Override
+    public boolean checkingDoubleProducts(PurchasedProducts product) {
+        for (PurchasedProducts sp : product.getBasket().getProducts()) {
+            if (sp.getProduct().equals(product.getProduct())) {
+                return true;
+            }
+        }
+        return false;
+    }
+}

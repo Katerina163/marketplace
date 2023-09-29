@@ -12,6 +12,8 @@
         <property name="remoteServices">
             <map>
                 <entry key="marketplace_SoldProductService" value="com.company.marketplace.service.SoldProductService"/>
+                <entry key="marketplace_PurchasedProductsService"
+                       value="com.company.marketplace.service.PurchasedProductsService"/>
             </map>
         </property>
     </bean>

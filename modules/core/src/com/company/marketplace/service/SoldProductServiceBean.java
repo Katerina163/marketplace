@@ -1,6 +1,5 @@
 package com.company.marketplace.service;
 
-import com.company.marketplace.entity.Shop;
 import com.company.marketplace.entity.SoldProduct;
 import org.springframework.stereotype.Service;
 
@@ -8,9 +7,8 @@ import org.springframework.stereotype.Service;
 public class SoldProductServiceBean implements SoldProductService {
 
     @Override
-    public boolean checkSoldProduct(SoldProduct product) {
-        Shop shop = product.getShop();
-        for (SoldProduct sp : shop.getProducts()) {
+    public boolean checkingAvailabilityProducts(SoldProduct product) {
+        for (SoldProduct sp : product.getShop().getProducts()) {
             if (sp.getProduct().equals(product.getProduct())) {
                 return true;
             }

@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
-        caption="msg://purchaseEdit.caption"
+        caption="msg://basketEdit.caption"
         focusComponent="form"
-        messagesPack="com.company.marketplace.web.screens.purchase">
+        messagesPack="com.company.marketplace.web.screens.basket">
     <data>
-        <instance id="purchaseDc"
-                  class="com.company.marketplace.entity.Purchase">
+        <instance id="basketDc"
+                  class="com.company.marketplace.entity.Basket">
             <view extends="_local">
-                <property name="shop" view="_minimal"/>
-                <property name="products" view="_base"/>
-                <property name="numberProducts"/>
+                <property name="products" view="view-purchaseProduct-with-shop"/>
             </view>
             <loader/>
             <collection id="productsDc" property="products"/>
@@ -18,31 +16,33 @@
     <dialogMode height="600"
                 width="800"/>
     <layout expand="editActions" spacing="true">
-        <form id="form" dataContainer="purchaseDc">
+        <form id="form" dataContainer="basketDc">
             <column width="350px">
-                <pickerField id="shopField" property="shop">
-                    <actions>
-                        <action id="lookup" type="picker_lookup"/>
-                        <action id="clear" type="picker_clear"/>
-                    </actions>
-                </pickerField>
+                <dateField id="dataField" property="data" editable="false"/>
                 <textField id="numberProductsField" property="numberProducts"/>
             </column>
         </form>
-        <groupBox id="productsBox" caption="msg://com.company.marketplace.entity/Purchase.products">
+        <groupBox id="productsBox" caption="msg://com.company.marketplace.entity/Basket.products">
             <table id="productsTable" dataContainer="productsDc" width="100%" height="200px">
                 <actions>
-                    <action id="add" type="add"/>
-                    <action id="exclude" type="exclude"/>
+                    <action id="add" type="create">
+                        <properties>
+                            <property name="screenClass" value="com.company.marketplace.web.screens.purchasedproducts.PurchasedProductsEdit"/>
+                        </properties>
+                    </action>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
                 </actions>
                 <columns>
+                    <column id="shop"/>
                     <column id="product"/>
                     <column id="price"/>
                     <column id="quantity"/>
                 </columns>
                 <buttonsPanel>
                     <button action="productsTable.add"/>
-                    <button action="productsTable.exclude"/>
+                    <button action="productsTable.edit"/>
+                    <button action="productsTable.remove"/>
                 </buttonsPanel>
             </table>
         </groupBox>

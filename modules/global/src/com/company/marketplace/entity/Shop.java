@@ -10,6 +10,7 @@ import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.List;
 
 @NamePattern("%s|name")
@@ -25,7 +26,7 @@ public class Shop extends StandardEntity {
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "shop")
-    private List<SoldProduct> products;
+    private List<SoldProduct> products = new ArrayList<>();
 
     @NotNull
     @Column(name = "TYPE_", nullable = false)

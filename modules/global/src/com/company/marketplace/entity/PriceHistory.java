@@ -16,12 +16,12 @@ public class PriceHistory extends StandardEntity {
     private static final long serialVersionUID = -4929317396043400859L;
 
     @NotNull
-    @OnDeleteInverse(DeletePolicy.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
     @NotNull
+    @OnDeleteInverse(DeletePolicy.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "SHOP_ID")
     private Shop shop;

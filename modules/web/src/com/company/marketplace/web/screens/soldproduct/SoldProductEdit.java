@@ -6,6 +6,7 @@ import com.haulmont.cuba.gui.components.ValidationErrors;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
+import java.util.Objects;
 
 @UiController("marketplace_SoldProduct.edit")
 @UiDescriptor("sold-product-edit.xml")
@@ -17,7 +18,7 @@ public class SoldProductEdit extends StandardEditor<SoldProduct> {
 
     @Override
     protected void validateAdditionalRules(ValidationErrors errors) {
-        if (service.checkSoldProduct(getEditedEntity())) {
+        if (Objects.isNull(getEditedEntity().getVersion()) && service.checkingAvailabilityProducts(getEditedEntity())) {
             errors.add("В магазине уже продается такой товар");
         }
         super.validateAdditionalRules(errors);

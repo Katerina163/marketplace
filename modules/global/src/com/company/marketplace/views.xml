@@ -5,4 +5,21 @@
         <property name="product" fetch="JOIN" view="_minimal"/>
         <property name="shop" view="_minimal"/>
     </view>
+    <view entity="marketplace_PurchasedProducts" name="view-purchaseProduct-with-shop" extends="_local">
+        <property name="shop" view="_minimal"/>
+        <property name="product" view="_minimal"/>
+    </view>
+    <view entity="marketplace_Basket" name="view-basket-with-products" extends="_local">
+        <property name="products" view="_minimal"/>
+    </view>
+    <view entity="marketplace_Shop" name="view-shop-with-products" extends="_local">
+        <property name="products" view="_minimal"/>
+    </view>
+    <view entity="marketplace_PurchasedProducts" name="view-purchasedProducts-with-product" extends="_local">
+        <property name="basket" view="_minimal"/>
+        <property name="product" view="_minimal">
+            <property name="price"/>
+            <property name="quantity"/>
+        </property>
+    </view>
 </views>

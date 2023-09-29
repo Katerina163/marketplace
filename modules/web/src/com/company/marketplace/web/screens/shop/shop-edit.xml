@@ -29,12 +29,12 @@
             <tab id="tab" caption="msg://tab1" margin="true" spacing="true">
                 <form id="form" dataContainer="shopDc">
                     <column width="350px">
+                        <textField id="nameField" property="name"/>
                         <textField id="numberField" property="number"/>
                         <lookupField id="typeField" property="type"/>
                         <textField id="addressCityField" property="address.city"/>
                         <textField id="addressStreetField" property="address.street"/>
                         <textField id="addressHouseField" property="address.house"/>
-                        <textField id="nameField" property="name"/>
                         <pickerField id="tradingNetworkField" property="tradingNetwork">
                             <actions>
                                 <action id="lookup" type="picker_lookup"/>
