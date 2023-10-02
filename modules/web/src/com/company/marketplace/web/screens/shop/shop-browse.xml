@@ -37,10 +37,10 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="number"/>
-                <column id="type"/>
                 <column id="name"/>
                 <column id="tradingNetwork"/>
+                <column id="number"/>
+                <column id="type"/>
             </columns>
             <rowsCount/>
             <buttonsPanel id="buttonsPanel"
