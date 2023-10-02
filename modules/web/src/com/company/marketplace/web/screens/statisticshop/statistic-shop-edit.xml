@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://statisticShopEdit.caption"
+        focusComponent="tab1"
+        messagesPack="com.company.marketplace.web.screens.statisticshop">
+    <data>
+        <instance id="statisticShopDc"
+                  class="com.company.marketplace.entity.StatisticShop">
+            <view extends="_local">
+                <property name="shop" view="_minimal"/>
+            </view>
+            <loader/>
+        </instance>
+        <instance id="statisticTradingNetworkDc" class="com.company.marketplace.entity.StatisticTradingNetwork">
+            <view extends="_local">
+                <property name="network"/>
+            </view>
+            <loader id="statisticTradingNetworkDl"/>
+        </instance>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <tabSheet>
+            <tab id="tab1" caption="msg://sales.tab1" spacing="true" margin="true">
+                <form id="form" dataContainer="statisticShopDc">
+                    <column width="350px">
+                        <pickerField id="shopField" dataContainer="statisticShopDc" property="shop">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="clear" type="picker_clear"/>
+                            </actions>
+                        </pickerField>
+                    </column>
+                </form>
+                <hbox id="calcShopActions" spacing="true">
+                    <button id="calculateShopBtn" caption="msg://button.calc"/>
+                </hbox>
+                <textField caption="msg://text.field" id="textShopField" editable="false"/>
+            </tab>
+            <tab id="tab2" caption="msg://sales.tab2" spacing="true" margin="true">
+                <form id="form2" dataContainer="statisticTradingNetworkDc">
+                    <column width="350px">
+                        <pickerField id="networkField" dataContainer="statisticTradingNetworkDc" property="network">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="clear" type="picker_clear"/>
+                            </actions>
+                        </pickerField>
+                    </column>
+                </form>
+                <hbox id="calcNetworkActions" spacing="true">
+                    <button id="calculateNetworkBtn" caption="msg://button.calc"/>
+                </hbox>
+                <textField caption="msg://text.field" id="textNetworkField" editable="false"/>
+            </tab>
+        </tabSheet>
+    </layout>
+</window>

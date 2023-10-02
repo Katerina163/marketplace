@@ -5,6 +5,7 @@
               caption="mainMsg://menu_config.marketplace_TradingNetwork.browse"/>
         <item screen="marketplace_PriceHistory.browse" caption="mainMsg://menu_config.marketplace_PriceHistory.browse"/>
         <item screen="marketplace_Shop.browse" caption="mainMsg://menu_config.marketplace_Shop.browse"/>
+        <item screen="marketplace_StatisticShop.edit" caption="mainMsg://marketplace_StatisticShop.edit"/>
     </menu>
     <menu id="application-marketplace2" insertBefore="administration" caption="mainMsg://menu_config.Manufacturer">
         <item screen="marketplace_Manufacturer.browse" caption="mainMsg://menu_config.marketplace_Manufacturer.browse"/>

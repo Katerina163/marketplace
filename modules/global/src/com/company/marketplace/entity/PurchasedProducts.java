@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @PublishEntityChangedEvents
 @Table(name = "MARKETPLACE_PURCHASED_PRODUCTS")
 @Entity(name = "marketplace_PurchasedProducts")
-@NamePattern("%s  %s|product,quantity")
+@NamePattern("%s %s|product,quantity")
 public class PurchasedProducts extends StandardEntity {
     private static final long serialVersionUID = -3228353320184570900L;
 
