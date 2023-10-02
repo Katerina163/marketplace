@@ -55,13 +55,13 @@ public class PurchasedProductsChangedListener {
             } else if (event.getChanges().isChanged("product")) {
                 Id<SoldProduct, UUID> id = event.getChanges().getOldValue("product");
                 SoldProduct productOld = tdm.load(id).view("view-soldProduct-with-shop").one();
-                Integer quantity;
+                Integer quantityNew;
                 if (Objects.isNull(event.getChanges().getOldValue("quantity"))) {
-                    quantity = pp.getQuantity();
+                    quantityNew = pp.getQuantity();
                 } else {
-                    quantity = event.getChanges().getOldValue("quantity");
+                    quantityNew = event.getChanges().getOldValue("quantity");
                 }
-                productOld.setQuantity(productOld.getQuantity() + quantity);
+                productOld.setQuantity(productOld.getQuantity() + quantityNew);
                 SoldProduct spNew = pp.getProduct();
                 spNew.setQuantity(spNew.getQuantity() - pp.getQuantity());
                 tdm.save(spNew, productOld);

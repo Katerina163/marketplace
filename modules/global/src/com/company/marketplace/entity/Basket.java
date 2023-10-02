@@ -13,8 +13,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @PublishEntityChangedEvents
 @Table(name = "MARKETPLACE_BASKET")
@@ -23,9 +23,10 @@ import java.util.List;
 public class Basket extends StandardEntity {
     private static final long serialVersionUID = -4352460935069378744L;
 
+    @NotNull
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "basket")
-    private List<PurchasedProducts> products = new ArrayList<>();
+    private List<PurchasedProducts> products;
 
     @NotNull
     @Column(name = "DATA_", nullable = false)
@@ -45,6 +46,9 @@ public class Basket extends StandardEntity {
 
     @MetaProperty(related = {"products"})
     public Long getNumberProducts() {
+        if (Objects.isNull(products)) {
+            return 0L;
+        }
         long result = 0;
         for (PurchasedProducts pp : products) {
             result += pp.getQuantity();
