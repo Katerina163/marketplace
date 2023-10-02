@@ -1,7 +1,9 @@
 package com.company.marketplace.web.screens.soldproduct;
 
+import com.company.marketplace.entity.Product;
 import com.company.marketplace.entity.SoldProduct;
 import com.company.marketplace.service.SoldProductService;
+import com.haulmont.cuba.gui.components.HasValue;
 import com.haulmont.cuba.gui.components.ValidationErrors;
 import com.haulmont.cuba.gui.screen.*;
 
@@ -22,5 +24,12 @@ public class SoldProductEdit extends StandardEditor<SoldProduct> {
             errors.add("В магазине уже продается такой товар");
         }
         super.validateAdditionalRules(errors);
+    }
+
+    @Subscribe("productField")
+    public void onProductFieldValueChange(HasValue.ValueChangeEvent<Product> event) {
+        if (event.isUserOriginated()) {
+            getEditedEntity().setPrice(event.getValue().getManufacturerPrice());
+        }
     }
 }
