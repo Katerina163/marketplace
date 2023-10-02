@@ -1,5 +1,6 @@
 package com.company.marketplace.entity;
 
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.MetaProperty;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
@@ -24,6 +25,7 @@ public class Basket extends StandardEntity {
     private static final long serialVersionUID = -4352460935069378744L;
 
     @NotNull
+    @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "basket")
     private List<PurchasedProducts> products;
@@ -42,6 +44,10 @@ public class Basket extends StandardEntity {
 
     public List<PurchasedProducts> getProducts() {
         return products;
+    }
+
+    public void setProducts(List<PurchasedProducts> products) {
+        this.products = products;
     }
 
     @MetaProperty(related = {"products"})
