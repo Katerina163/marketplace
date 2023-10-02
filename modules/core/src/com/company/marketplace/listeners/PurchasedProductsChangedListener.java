@@ -13,6 +13,7 @@ import org.springframework.transaction.event.TransactionPhase;
 import org.springframework.transaction.event.TransactionalEventListener;
 
 import javax.inject.Inject;
+import java.util.Objects;
 import java.util.UUID;
 
 @Component("marketplace_PurchasedProductsChangedListener")
@@ -53,18 +54,17 @@ public class PurchasedProductsChangedListener {
                 tdm.save(sp);
             } else if (event.getChanges().isChanged("product")) {
                 Id<SoldProduct, UUID> id = event.getChanges().getOldValue("product");
-             /*   SoldProduct product = tdm.load(id).one(); //не работает
+                SoldProduct productOld = tdm.load(id).view("view-soldProduct-with-shop").one();
                 Integer quantity;
                 if (Objects.isNull(event.getChanges().getOldValue("quantity"))) {
                     quantity = pp.getQuantity();
                 } else {
                     quantity = event.getChanges().getOldValue("quantity");
                 }
-                product.setQuantity(product.getQuantity() + quantity);
-                tdm.save(product);
+                productOld.setQuantity(productOld.getQuantity() + quantity);
                 SoldProduct spNew = pp.getProduct();
                 spNew.setQuantity(spNew.getQuantity() - pp.getQuantity());
-                tdm.save(spNew);*/
+                tdm.save(spNew, productOld);
             }
         }
     }
