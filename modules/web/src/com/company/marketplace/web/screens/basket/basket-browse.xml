@@ -33,7 +33,7 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="data"/>
+                <column id="data" sort="ASCENDING"/>
                 <column id="numberProducts"/>
             </columns>
             <rowsCount/>
