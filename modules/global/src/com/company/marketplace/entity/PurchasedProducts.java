@@ -30,7 +30,7 @@ public class PurchasedProducts extends StandardEntity {
     private BigDecimal price;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_ID")
+    @JoinColumn(name = "SOLD_PRODUCT_ID")
     private SoldProduct product;
 
     @NotNull
