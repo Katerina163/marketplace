@@ -22,4 +22,16 @@
             <property name="quantity"/>
         </property>
     </view>
+    <view entity="marketplace_SoldProduct" name="view-soldProduct-with-products" extends="_local">
+        <property name="product" view="_minimal"/>
+    </view>
+    <view entity="marketplace_Shop" name="view-shop-with-all" extends="_local">
+        <property name="products" view="_minimal"/>
+        <property name="address" view="_minimal">
+            <property name="city"/>
+            <property name="street"/>
+            <property name="house"/>
+        </property>
+        <property name="tradingNetwork" view="_minimal"/>
+    </view>
 </views>

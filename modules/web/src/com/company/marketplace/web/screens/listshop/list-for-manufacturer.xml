@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
+        caption="msg://listShopBrowse.caption"
+        focusComponent="tabSheet"
+        messagesPack="com.company.marketplace.web.screens.listshop">
+    <data readOnly="true">
+        <instance id="listShopDc" class="com.company.marketplace.entity.ListShop">
+            <view extends="_local"/>
+            <loader id="listShopDl"/>
+        </instance>
+        <instance id="listProductDc" class="com.company.marketplace.entity.ListProduct">
+            <view extends="_local"/>
+            <loader id="listProductDl"/>
+        </instance>
+        <collection id="soldProductsDc" class="com.company.marketplace.entity.SoldProduct">
+            <view extends="view-soldProduct-with-products"/>
+            <loader id="soldProductsDl">
+                <query>
+                    <![CDATA[select e from marketplace_SoldProduct e where e.quantity > :quantity and e.shop = :shop and e.product.manufacturer = :manufacturer]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="shopsDc" class="com.company.marketplace.entity.Shop">
+            <view extends="view-shop-with-all"/>
+            <loader id="shopsDl">
+                <query>
+                    <![CDATA[select e from marketplace_Shop]]>
+                </query>
+            </loader>
+        </collection>
+    </data>
+    <dialogMode height="600"
+                width="800"/>
+    <layout spacing="true">
+        <tabSheet id="tabSheet">
+            <tab id="tab1" caption="msg://tab1" spacing="true" margin="true">
+                <form id="form1" dataContainer="listProductDc">
+                    <column width="350px">
+                        <pickerField id="manufacturerField" dataContainer="listProductDc" property="manufacturer">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="clear" type="picker_clear"/>
+                            </actions>
+                        </pickerField>
+                        <pickerField id="shopField" dataContainer="listProductDc" property="shop">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="clear" type="picker_clear"/>
+                            </actions>
+                        </pickerField>
+                        <textField id="quantityField" caption="msg://quantity"/>
+                    </column>
+                </form>
+                <hbox id="calcWithNumber" spacing="true">
+                    <button id="calculateWithNumberBtn" caption="msg://button.calc"/>
+                </hbox>
+                <table id="soldProductsTable" height="400px" width="400px" dataContainer="soldProductsDc">
+                    <columns>
+                        <column id="product"/>
+                        <column id="price"/>
+                        <column id="quantity"/>
+                    </columns>
+                </table>
+            </tab>
+            <tab id="tab2" caption="msg://tab2" spacing="true" margin="true">
+                <form id="form2" dataContainer="listShopDc">
+                    <column width="350px">
+                        <pickerField id="productField" dataContainer="listShopDc" property="product">
+                            <actions>
+                                <action id="lookup" type="picker_lookup"/>
+                                <action id="clear" type="picker_clear"/>
+                            </actions>
+                        </pickerField>
+                    </column>
+                </form>
+                <hbox id="calcWithoutProduct" spacing="true">
+                    <button id="calculateWithoutProductBtn" caption="msg://button.calc"/>
+                </hbox>
+                <table id="shopsTable" height="400px" width="800px" dataContainer="shopsDc">
+                    <columns>
+                        <column id="tradingNetwork"/>
+                        <column id="name"/>
+                        <column id="address"/>
+                        <column id="type"/>
+                    </columns>
+                </table>
+            </tab>
+        </tabSheet>
+    </layout>
+</window>

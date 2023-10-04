@@ -4,6 +4,8 @@
     <metadata-model root-package="com.company.marketplace" namespace="marketplace">
         <class>com.company.marketplace.entity.StatisticShop</class>
         <class>com.company.marketplace.entity.StatisticTradingNetwork</class>
+        <class>com.company.marketplace.entity.ListShop</class>
+        <class>com.company.marketplace.entity.ListProduct</class>
     </metadata-model>
 
 </metadata>
