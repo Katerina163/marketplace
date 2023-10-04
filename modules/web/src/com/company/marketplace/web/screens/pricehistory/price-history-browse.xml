@@ -30,11 +30,6 @@
         <groupTable id="priceHistoriesTable"
                     width="100%"
                     dataContainer="priceHistoriesDc">
-            <actions>
-                <action id="create" type="create"/>
-                <action id="edit" type="edit"/>
-                <action id="remove" type="remove"/>
-            </actions>
             <columns>
                 <column id="product"/>
                 <column id="shop"/>
