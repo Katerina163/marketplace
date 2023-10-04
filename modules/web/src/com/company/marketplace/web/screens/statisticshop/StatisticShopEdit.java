@@ -32,7 +32,12 @@ public class StatisticShopEdit extends StandardLookup<StatisticShop> {
     public void onCalculateShopBtnClick(Button.ClickEvent event) {
         String str;
         if (Objects.nonNull(shopField.getValue())) {
-            str = statisticService.calculateSalesShop(shopField.getValue()).toString();
+            Long result = statisticService.calculateSalesShop(shopField.getValue());
+            if (result != -1) {
+                str = result.toString();
+            } else {
+                str = "Продажи отсутствуют";
+            }
         } else {
             str = "Необходимо выбрать магазин";
         }
@@ -43,7 +48,12 @@ public class StatisticShopEdit extends StandardLookup<StatisticShop> {
     public void onCalculateNetworkBtnClick(Button.ClickEvent event) {
         String str;
         if (Objects.nonNull(networkField.getValue())) {
-            str = statisticService.calculateSalesTradingNetwork(networkField.getValue()).toString();
+            Long result = statisticService.calculateSalesTradingNetwork(networkField.getValue());
+            if (result != -1) {
+                str = result.toString();
+            } else {
+                str = "Продажи отсутствуют";
+            }
         } else {
             str = "Необходимо выбрать сеть";
         }
