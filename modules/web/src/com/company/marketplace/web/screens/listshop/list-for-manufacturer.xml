@@ -16,7 +16,7 @@
             <view extends="view-soldProduct-with-products"/>
             <loader id="soldProductsDl">
                 <query>
-                    <![CDATA[select e from marketplace_SoldProduct e where e.quantity > :quantity and e.shop = :shop and e.product.manufacturer = :manufacturer]]>
+                    <![CDATA[select e from marketplace_SoldProduct e where e.quantity < :quantity and e.shop = :shop and e.product.manufacturer = :manufacturer]]>
                 </query>
             </loader>
         </collection>

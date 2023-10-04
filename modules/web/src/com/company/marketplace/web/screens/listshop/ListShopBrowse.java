@@ -30,7 +30,7 @@ public class ListShopBrowse extends StandardLookup<ListShop> {
 
     @Subscribe
     public void onInit(InitEvent event) {
-        soldProductsDl.setParameter("quantity", Integer.MAX_VALUE);
+        soldProductsDl.setParameter("quantity", 0);
         soldProductsDl.setParameter("shop", null);
         soldProductsDl.setParameter("manufacturer", null);
         soldProductsDl.load();
