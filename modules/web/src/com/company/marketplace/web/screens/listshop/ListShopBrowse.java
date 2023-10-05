@@ -58,10 +58,8 @@ public class ListShopBrowse extends StandardLookup<ListShop> {
     private List<SoldProduct> soldProductsDlLoadDelegate(LoadContext<SoldProduct> loadContext) {
         Long quantity = Objects.isNull(quantityField.getValue()) ? -1L : Integer.parseInt(quantityField.getValue());
         loadContext.getQuery().setParameter("quantity", quantity);
-        Shop shop = Objects.isNull(shopField.getValue()) ? null : shopField.getValue();
-        loadContext.getQuery().setParameter("shop", shop);
-        Manufacturer manufacturer = Objects.isNull(manufacturerField.getValue()) ? null : manufacturerField.getValue();
-        loadContext.getQuery().setParameter("manufacturer", manufacturer);
+        loadContext.getQuery().setParameter("shop", shopField.getValue());
+        loadContext.getQuery().setParameter("manufacturer", manufacturerField.getValue());
         return dataManager.loadList(loadContext);
     }
 }
