@@ -7,6 +7,7 @@ import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Table(name = "MARKETPLACE_PRICE_HISTORY")
@@ -20,6 +21,9 @@ public class PriceHistory extends StandardEntity {
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
+    @Column(name = "PRICE")
+    private BigDecimal price;
+
     @NotNull
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -29,6 +33,14 @@ public class PriceHistory extends StandardEntity {
     @NotNull
     @Column(name = "DATE_PRICE_CHANGE")
     private LocalDateTime datePriceChange;
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     public LocalDateTime getDatePriceChange() {
         return datePriceChange;

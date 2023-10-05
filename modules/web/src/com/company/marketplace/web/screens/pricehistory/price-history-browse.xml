@@ -33,6 +33,7 @@
             <columns>
                 <column id="product"/>
                 <column id="shop"/>
+                <column id="price"/>
                 <column id="datePriceChange"/>
             </columns>
             <rowsCount/>
