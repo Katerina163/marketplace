@@ -33,11 +33,7 @@ public class StatisticShopEdit extends StandardLookup<StatisticShop> {
         String str;
         if (Objects.nonNull(shopField.getValue())) {
             Long result = statisticService.calculateSalesShop(shopField.getValue());
-            if (result != -1) {
-                str = result.toString();
-            } else {
-                str = "Продажи отсутствуют";
-            }
+            str = result != -1 ? result.toString() : "Продажи отсутствуют";
         } else {
             str = "Необходимо выбрать магазин";
         }
@@ -49,11 +45,7 @@ public class StatisticShopEdit extends StandardLookup<StatisticShop> {
         String str;
         if (Objects.nonNull(networkField.getValue())) {
             Long result = statisticService.calculateSalesTradingNetwork(networkField.getValue());
-            if (result != -1) {
-                str = result.toString();
-            } else {
-                str = "Продажи отсутствуют";
-            }
+            str = result != -1 ? result.toString() : "Продажи отсутствуют";
         } else {
             str = "Необходимо выбрать сеть";
         }
