@@ -24,7 +24,7 @@
             <view extends="view-shop-with-all"/>
             <loader id="shopsDl">
                 <query>
-                    <![CDATA[select e from marketplace_Shop]]>
+                    <![CDATA[select e from marketplace_Shop e where e.tradingNetwork = :null]]>
                 </query>
             </loader>
         </collection>
