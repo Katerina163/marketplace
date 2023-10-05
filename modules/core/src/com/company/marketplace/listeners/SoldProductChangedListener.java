@@ -25,6 +25,7 @@ public class SoldProductChangedListener {
             ph.setProduct(sp.getProduct());
             ph.setShop(sp.getShop());
             ph.setDatePriceChange(LocalDateTime.now());
+            ph.setPrice(sp.getPrice());
             tdm.save(ph);
         }
     }
