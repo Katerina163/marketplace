@@ -49,6 +49,10 @@
                 </hbox>
             </tab>
             <tab id="tab2" caption="msg://tab2" margin="true" spacing="true">
+                <hbox spacing="true" margin="true">
+                    <textField id="colorPrice" caption="msg://color.price" datatype="int" align="BOTTOM_CENTER"/>
+                    <button id="colorPriceBtn" caption="msg://button.show" align="BOTTOM_CENTER"/>
+                </hbox>
                 <groupBox id="productsBox" caption="msg://com.company.marketplace.entity/Shop.products">
                     <table id="productsTable" dataContainer="productsDc" width="100%" height="200px">
                         <actions>
