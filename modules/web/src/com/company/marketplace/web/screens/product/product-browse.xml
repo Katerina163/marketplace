@@ -26,6 +26,10 @@
                 dataLoader="productsDl">
             <properties include=".*"/>
         </filter>
+        <hbox spacing="true" margin="true">
+            <textField id="colorPrice" caption="msg://color.price" datatype="decimal" align="BOTTOM_CENTER"/>
+            <button id="colorPriceBtn" caption="msg://button.show" align="BOTTOM_CENTER"/>
+        </hbox>
         <groupTable id="productsTable"
                     width="100%"
                     dataContainer="productsDc">

@@ -8,4 +8,9 @@
   @include app_components;
 
   @include com_company_marketplace-halo-ext;
+
+  .colored-grade {
+    background-color: #205c5e;
+    color: rgba(146, 250, 242, 0.73);
+  }
 }
