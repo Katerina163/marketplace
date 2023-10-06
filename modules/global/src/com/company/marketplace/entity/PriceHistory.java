@@ -21,6 +21,7 @@ public class PriceHistory extends StandardEntity {
     @JoinColumn(name = "PRODUCT_ID")
     private Product product;
 
+    @NotNull
     @Column(name = "PRICE")
     private BigDecimal price;
 
