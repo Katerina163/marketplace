@@ -2,7 +2,8 @@
 <window xmlns="http://schemas.haulmont.com/cuba/screen/window.xsd"
         caption="msg://tradingNetworkEdit.caption"
         focusComponent="form"
-        messagesPack="com.company.marketplace.web.screens.tradingnetwork">
+        messagesPack="com.company.marketplace.web.screens.tradingnetwork"
+        xmlns:maps="http://schemas.haulmont.com/maps/0.1/ui-component.xsd">
     <data>
         <instance id="tradingNetworkDc"
                   class="com.company.marketplace.entity.TradingNetwork">
@@ -12,16 +13,23 @@
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="editActions" spacing="true">
-        <form id="form" dataContainer="tradingNetworkDc">
-            <column width="350px">
-                <textField id="nameField" property="name"/>
-                <textField id="fullNameField" property="fullName"/>
-            </column>
-        </form>
-        <hbox id="editActions" spacing="true">
-            <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
-            <button id="closeBtn" action="windowClose"/>
-        </hbox>
+    <layout spacing="true">
+        <maps:geoMap id="map" width="100%" height="100%" center="50.1371891, 53.1985782" zoom="12">
+            <maps:layers>
+                <maps:tile id="titleLayer" tileProvider="maps_OpenStreetMap"/>
+            </maps:layers>
+        </maps:geoMap>
+        <vbox spacing="true">
+            <form id="form" dataContainer="tradingNetworkDc">
+                <column width="350px">
+                    <textField id="nameField" property="name"/>
+                    <textField id="fullNameField" property="fullName"/>
+                </column>
+            </form>
+            <hbox id="editActions" spacing="true">
+                <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+                <button id="closeBtn" action="windowClose"/>
+            </hbox>
+        </vbox>
     </layout>
 </window>

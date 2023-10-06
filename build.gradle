@@ -1,4 +1,3 @@
-
 buildscript {
     ext.cubaVersion = '7.2.20'
     repositories {
@@ -9,7 +8,14 @@ buildscript {
                 password(rootProject.hasProperty('repoPass') ? rootProject['repoPass'] : 'cuba123')
             }
         }
-        
+
+        maven {
+            url 'https://repo.cuba-platform.com/content/groups/premium'
+            credentials {
+                username("${rootProject['premiumRepoUser']}")
+                password("${rootProject['premiumRepoPass']}")
+            }
+        }
     }
     dependencies {
         classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"
@@ -21,6 +27,7 @@ def modulePrefix = 'market'
 def globalModule = project(":${modulePrefix}-global")
 def coreModule = project(":${modulePrefix}-core")
 def webModule = project(":${modulePrefix}-web")
+def webToolkitModule = project(":${modulePrefix}-web-toolkit")
 
 def servletApi = 'javax.servlet:javax.servlet-api:3.1.0'
 
@@ -36,20 +43,23 @@ cuba {
 
 dependencies {
     appComponent("com.haulmont.cuba:cuba-global:$cubaVersion")
+    appComponent('com.haulmont.addon.maps:maps-global:1.3.1')
 }
 
 def hsql = 'org.hsqldb:hsqldb:2.4.1'
 
-configure([globalModule, coreModule, webModule]) {
+configure([globalModule, coreModule, webModule, webToolkitModule]) {
     apply(plugin: 'java')
     apply(plugin: 'maven')
     apply(plugin: 'cuba')
 
     dependencies {
-            testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
-            testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
-            testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')  
-        }
+        testCompile('org.junit.jupiter:junit-jupiter-api:5.5.2')
+        testCompile('org.junit.jupiter:junit-jupiter-engine:5.5.2')
+        testCompile('org.junit.vintage:junit-vintage-engine:5.5.2')
+
+        implementation 'com.opencagedata:jopencage:1.4.1'
+    }
 
     task sourceJar(type: Jar) {
         from file('src')
@@ -58,7 +68,7 @@ configure([globalModule, coreModule, webModule]) {
 
     artifacts {
         archives sourceJar
-    } 
+    }
     test {
         useJUnitPlatform()
     }
@@ -76,6 +86,13 @@ configure(globalModule) {
     entitiesEnhancing {
         main {
             enabled = true
+        }
+    }
+
+    jar {
+        manifest {
+            attributes('App-Component-Id': cuba.artifact.group)
+            attributes('App-Component-Version': cuba.artifact.version + (cuba.artifact.isSnapshot ? '-SNAPSHOT' : ''))
         }
     }
 }
@@ -118,6 +135,13 @@ configure(webModule) {
     dependencies {
         compileOnly(servletApi)
         compile(globalModule)
+    }
+
+    jar {
+        with copySpec {
+            from sourceSets.main.allJava
+            include "com/company/marketplace/web/toolkit/ui/client/**"
+        }
     }
 
     task webArchive(type: Zip) {
@@ -166,13 +190,45 @@ configure(webModule) {
     }
 }
 
+configure(webToolkitModule) {
+    dependencies {
+        compile(webModule)
+    }
+
+    jar {
+        from sourceSets.main.allJava
+    }
+
+    task buildWidgetSet(type: CubaWidgetSetBuilding) {
+        widgetSetClass = 'com.company.marketplace.web.toolkit.ui.AppWidgetSet'
+    }
+
+    task debugWidgetSet(type: CubaWidgetSetDebug) {
+        widgetSetClass = 'com.company.marketplace.web.toolkit.ui.AppWidgetSet'
+    }
+
+    task webArchive(dependsOn: buildWidgetSet, type: Jar) {
+        from file("$buildDir/web")
+        classifier = 'client'
+    }
+
+    artifacts {
+        archives webArchive
+    }
+
+    task deploy(dependsOn: webArchive, type: Copy) {
+        from webArchive
+        into "$cuba.tomcat.dir/webapps/${modulePrefix}/WEB-INF/lib"
+    }
+}
+
 task undeploy(type: Delete, dependsOn: ":${modulePrefix}-web:cleanConf") {
     delete("$cuba.tomcat.dir/shared")
     delete("$cuba.tomcat.dir/webapps/${modulePrefix}-core")
     delete("$cuba.tomcat.dir/webapps/${modulePrefix}")
 }
 
-task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefix}-web:deploy"], description: 'Redeploys applications and restarts local Tomcat') {
+task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefix}-web:deploy", ":${modulePrefix}-web-toolkit:deploy"], description: 'Redeploys applications and restarts local Tomcat') {
     doLast {
         ant.waitfor(maxwait: 6, maxwaitunit: 'second', checkevery: 2, checkeveryunit: 'second') {
             not {

@@ -3,7 +3,6 @@ package com.company.marketplace;
 import com.haulmont.cuba.testsupport.TestContainer;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class MarketplaceTestContainer extends TestContainer {
@@ -11,10 +10,9 @@ public class MarketplaceTestContainer extends TestContainer {
     public MarketplaceTestContainer() {
         super();
         //noinspection ArraysAsListWithZeroOrOneArgument
-        appComponents = new ArrayList<>(Arrays.asList(
-                // list add-ons here: "com.haulmont.reports", "com.haulmont.addon.bproc", etc.
-                "com.haulmont.cuba"
-        ));
+        appComponents = Arrays.asList(
+                "com.haulmont.cuba",
+                "com.haulmont.addon.maps");
         appPropertiesFiles = Arrays.asList(
                 // List the files defined in your web.xml
                 // in appPropertiesConfig context parameter of the core module
@@ -26,7 +24,6 @@ public class MarketplaceTestContainer extends TestContainer {
         autoConfigureDataSource();
     }
 
-    
 
     public static class Common extends MarketplaceTestContainer {
 
@@ -45,7 +42,7 @@ public class MarketplaceTestContainer extends TestContainer {
             }
             setupContext();
         }
-        
+
 
         @SuppressWarnings("RedundantThrows")
         @Override
@@ -53,6 +50,6 @@ public class MarketplaceTestContainer extends TestContainer {
             cleanupContext();
             // never stops - do not call super
         }
-        
+
     }
 }

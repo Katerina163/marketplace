@@ -5,7 +5,7 @@ import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.EmbeddedParameters;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
-import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
+import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
@@ -13,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+@PublishEntityChangedEvents
 @NamePattern("%s|name")
 @Table(name = "MARKETPLACE_SHOP")
 @Entity(name = "marketplace_Shop")
@@ -48,7 +49,6 @@ public class Shop extends StandardEntity {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "TRADING_NETWORK_ID")
-    @OnDeleteInverse(DeletePolicy.DENY)
     private TradingNetwork tradingNetwork;
 
     public List<SoldProduct> getProducts() {
