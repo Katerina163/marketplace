@@ -2,9 +2,7 @@ package com.company.marketplace.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
-import com.haulmont.cuba.core.global.DeletePolicy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -19,8 +17,8 @@ public class SoldProduct extends StandardEntity {
     private static final long serialVersionUID = -8284431251793090384L;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PRODUCT_ID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Product product;
 
     @NotNull

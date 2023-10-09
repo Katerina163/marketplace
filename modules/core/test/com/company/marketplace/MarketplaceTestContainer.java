@@ -12,7 +12,8 @@ public class MarketplaceTestContainer extends TestContainer {
         //noinspection ArraysAsListWithZeroOrOneArgument
         appComponents = Arrays.asList(
                 "com.haulmont.cuba",
-                "com.haulmont.addon.maps");
+                "com.haulmont.addon.maps",
+                "com.haulmont.charts");
         appPropertiesFiles = Arrays.asList(
                 // List the files defined in your web.xml
                 // in appPropertiesConfig context parameter of the core module
