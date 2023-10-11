@@ -16,5 +16,6 @@
         <class>com.company.marketplace.entity.PhysicalEntity</class>
         <class>com.company.marketplace.entity.OnlineOrder</class>
         <class>com.company.marketplace.entity.BuyProduct</class>
+        <class>com.company.marketplace.entity.ExtUser</class>
     </persistence-unit>
 </persistence>
