@@ -1,5 +1,6 @@
 package com.company.marketplace.entity;
 
+import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
 import com.haulmont.cuba.core.global.DeletePolicy;
@@ -10,9 +11,7 @@ import javax.validation.constraints.Email;
 
 @Table(name = "MARKETPLACE_BUYER")
 @Entity(name = "marketplace_Buyer")
-@DiscriminatorColumn(name = "DTYPE", discriminatorType = DiscriminatorType.STRING)
-@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorValue("BUYER")
+@NamePattern("%s|email")
 public class Buyer extends StandardEntity {
     private static final long serialVersionUID = 4432138918202725233L;
 

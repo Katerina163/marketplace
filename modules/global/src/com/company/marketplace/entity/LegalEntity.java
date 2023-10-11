@@ -1,13 +1,15 @@
 package com.company.marketplace.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
+import com.haulmont.cuba.core.entity.annotation.Extends;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-@DiscriminatorValue("LegalEntity")
 @Table(name = "MARKETPLACE_LEGAL_ENTITY")
 @Entity(name = "marketplace_LegalEntity")
-@PrimaryKeyJoinColumn(name = "ID")
+@Extends(Buyer.class)
 @NamePattern("%s|designation")
 public class LegalEntity extends Buyer {
     private static final long serialVersionUID = -6776648809981010884L;
