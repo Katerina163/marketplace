@@ -11,5 +11,10 @@
         <class>com.company.marketplace.entity.PriceHistory</class>
         <class>com.company.marketplace.entity.SoldProduct</class>
         <class>com.company.marketplace.entity.PurchasedProducts</class>
+        <class>com.company.marketplace.entity.Buyer</class>
+        <class>com.company.marketplace.entity.LegalEntity</class>
+        <class>com.company.marketplace.entity.PhysicalEntity</class>
+        <class>com.company.marketplace.entity.OnlineOrder</class>
+        <class>com.company.marketplace.entity.BuyProduct</class>
     </persistence-unit>
 </persistence>
