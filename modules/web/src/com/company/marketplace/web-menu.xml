@@ -3,9 +3,9 @@
     <menu id="application-marketplace" insertBefore="administration" caption="mainMsg://menu_config.TradingNetwork">
         <item screen="marketplace_TradingNetwork.browse"
               caption="mainMsg://menu_config.marketplace_TradingNetwork.browse"/>
-        <item screen="marketplace_PriceHistory.browse" caption="mainMsg://menu_config.marketplace_PriceHistory.browse"/>
         <item screen="marketplace_Shop.browse" caption="mainMsg://menu_config.marketplace_Shop.browse"/>
         <item screen="marketplace_StatisticShop.edit" caption="mainMsg://marketplace_StatisticShop.edit"/>
+        <item screen="marketplace_PriceHistory.browse" caption="mainMsg://menu_config.marketplace_PriceHistory.browse"/>
     </menu>
     <menu id="application-marketplace2" insertBefore="administration" caption="mainMsg://menu_config.Manufacturer">
         <item screen="marketplace_Manufacturer.browse" caption="mainMsg://menu_config.marketplace_Manufacturer.browse"/>
@@ -16,5 +16,6 @@
     <menu id="application-marketplace3" insertBefore="administration"
           caption="mainMsg://menu_config.marketplace_Purchase.browse">
         <item screen="marketplace_Basket.browse" caption="mainMsg://menu_config.marketplace_Basket.browse"/>
+        <item screen="marketplace_OnlineOrder.browse" caption="mainMsg://menu_config.marketplace_OnlineOrder.browse"/>
     </menu>
 </menu-config>

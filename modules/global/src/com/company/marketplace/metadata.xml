@@ -6,6 +6,7 @@
         <class>com.company.marketplace.entity.StatisticTradingNetwork</class>
         <class>com.company.marketplace.entity.ListShop</class>
         <class>com.company.marketplace.entity.ListProduct</class>
+        <class>com.company.marketplace.entity.SaledProduct</class>
     </metadata-model>
 
 </metadata>

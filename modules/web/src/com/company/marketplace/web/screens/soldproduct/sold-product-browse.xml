@@ -18,10 +18,8 @@
             </loader>
         </collection>
     </data>
-    <dialogMode height="600"
-                width="800"/>
-    <layout expand="soldProductsTable"
-            spacing="true">
+    <dialogMode height="600" width="800"/>
+    <layout expand="soldProductsTable" spacing="true">
         <filter id="filter"
                 applyTo="soldProductsTable"
                 dataLoader="soldProductsDl">
@@ -36,9 +34,9 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="shop"/>
-                <column id="product"/>
+                <column id="product" sort="ASCENDING"/>
                 <column id="price"/>
+                <column id="shop"/>
             </columns>
             <rowsCount/>
         </groupTable>

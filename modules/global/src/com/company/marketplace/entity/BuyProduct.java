@@ -19,11 +19,12 @@ public class BuyProduct extends StandardEntity {
     private Long quantity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PRODUCT_ID", unique = true)
-    private Product product;
+    @JoinColumn(name = "SOLD_PRODUCT_ID")
+    private SoldProduct product;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ONLINE_ORDER_ID")
+    @NotNull
     private OnlineOrder onlineOrder;
 
     public OnlineOrder getOnlineOrder() {
@@ -34,11 +35,11 @@ public class BuyProduct extends StandardEntity {
         this.onlineOrder = onlineOrder;
     }
 
-    public Product getProduct() {
+    public SoldProduct getProduct() {
         return product;
     }
 
-    public void setProduct(Product product) {
+    public void setProduct(SoldProduct product) {
         this.product = product;
     }
 

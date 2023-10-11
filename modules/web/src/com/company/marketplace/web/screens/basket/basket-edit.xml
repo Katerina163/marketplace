@@ -23,7 +23,7 @@
             </column>
         </form>
         <groupBox id="productsBox" caption="msg://com.company.marketplace.entity/Basket.products">
-            <table id="productsTable" dataContainer="productsDc" width="100%" height="200px">
+            <table id="productsTable" dataContainer="productsDc" width="100%" height="400px">
                 <actions>
                     <action id="add" type="create">
                         <properties>

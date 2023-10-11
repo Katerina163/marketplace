@@ -1,5 +1,6 @@
 package com.company.marketplace.entity;
 
+import com.haulmont.chile.core.annotations.Composition;
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
@@ -19,12 +20,12 @@ import java.util.List;
 public class OnlineOrder extends StandardEntity {
     private static final long serialVersionUID = -9093884912635372877L;
 
-    @NotNull
     @OnDeleteInverse(DeletePolicy.CASCADE)
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BUYER_ID")
     private Buyer buyer;
 
+    @Composition
     @OnDelete(DeletePolicy.CASCADE)
     @OneToMany(mappedBy = "onlineOrder")
     private List<BuyProduct> products;

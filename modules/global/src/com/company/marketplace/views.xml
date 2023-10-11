@@ -48,4 +48,13 @@
             </property>
         </property>
     </view>
+    <view entity="marketplace_OnlineOrder" name="view-online-order-with-all" extends="_local">
+        <property name="buyer" view="_minimal"/>
+        <property name="products" view="_minimal"/>
+    </view>
+    <view entity="marketplace_BuyProduct" name="view-buyProduct-with-product-price" extends="_local">
+        <property name="product" view="_minimal">
+            <property name="price"/>
+        </property>
+    </view>
 </views>
