@@ -2,9 +2,9 @@ package com.company.marketplace.web.screens.onlineorder;
 
 import com.company.marketplace.entity.*;
 import com.haulmont.cuba.core.app.UniqueNumbersService;
-import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;
 import com.haulmont.cuba.gui.RemoveOperation;
+import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.components.TextField;
 import com.haulmont.cuba.gui.model.CollectionContainer;
@@ -37,9 +37,9 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
     @Inject
     private CollectionContainer<SoldProduct> soldProductsDc;
     @Inject
-    private DataManager dataManager;
-    @Inject
     private Table<BuyProduct> productsTable;
+    @Inject
+    private ScreenBuilders screenBuilders;
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<OnlineOrder> event) {
@@ -109,13 +109,18 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
     @Subscribe("saleProductsTable")
     public void onSaleProductsTableSelection(Table.SelectionEvent<SaleProduct> event) {
         SoldProduct product = event.getSelected().stream().findFirst().get().getProduct();
-//        BuyProduct buyProduct = dataManager.create(BuyProduct.class);
-//        buyProduct.setProduct(product);
-//        buyProduct.setOnlineOrder(getEditedEntity());
-//        buyProduct.setQuantity(1L);
-//        int sale = LocalDate.now().getDayOfMonth();
-//        buyProduct.setPrice(BigDecimal.valueOf(product.getPrice().longValue() * (100 - sale) / 100));
-//        dataManager.commit(getEditedEntity(), buyProduct);
-        productsTable.repaint();
+        screenBuilders.editor(productsTable)
+                .withScreenId("marketplace_BuyProductForSale.edit")
+                .newEntity()
+                .withInitializer(buyProduct -> {
+                    buyProduct.setOnlineOrder(getEditedEntity());
+                    buyProduct.setQuantity(1L);
+                    buyProduct.setProduct(product);
+                    int sale = LocalDate.now().getDayOfMonth();
+                    buyProduct.setPrice(BigDecimal.valueOf(product.getPrice().longValue() * (100 - sale) / 100));
+                })
+                .withLaunchMode(OpenMode.DIALOG)
+                .build()
+                .show();
     }
 }
