@@ -109,7 +109,7 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
     @Subscribe("saleProductsTable")
     public void onSaleProductsTableSelection(Table.SelectionEvent<SaleProduct> event) {
         SoldProduct product = event.getSelected().stream().findFirst().get().getProduct();
-        screenBuilders.editor(productsTable)
+        Screen screen = screenBuilders.editor(productsTable)
                 .withScreenId("marketplace_BuyProductForSale.edit")
                 .newEntity()
                 .withInitializer(buyProduct -> {
@@ -120,7 +120,10 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
                     buyProduct.setPrice(BigDecimal.valueOf(product.getPrice().longValue() * (100 - sale) / 100));
                 })
                 .withLaunchMode(OpenMode.DIALOG)
-                .build()
-                .show();
+                .build();
+        screen.addAfterCloseListener(afterCloseEvent -> {
+            calculateAmountWithSale();
+        });
+        screen.show();
     }
 }
