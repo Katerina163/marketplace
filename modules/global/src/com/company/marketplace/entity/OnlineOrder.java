@@ -16,7 +16,7 @@ import java.util.List;
 
 @Table(name = "MARKETPLACE_ONLINE_ORDER")
 @Entity(name = "marketplace_OnlineOrder")
-@NamePattern("%s %s|buyer,amount")
+@NamePattern("№%s; %s|number,amount")
 public class OnlineOrder extends StandardEntity {
     private static final long serialVersionUID = -9093884912635372877L;
 

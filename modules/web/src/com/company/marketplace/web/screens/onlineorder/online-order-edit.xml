@@ -12,6 +12,26 @@
             <loader/>
             <collection id="productsDc" property="products"/>
         </instance>
+        <collection id="saleProductsDc" class="com.company.marketplace.entity.SaleProduct">
+            <view extends="_local">
+                <property name="product">
+                    <property name="price"/>
+                </property>
+            </view>
+            <loader id="saleProductsDl">
+                <query>
+                    <![CDATA[select e from marketplace_SaleProduct e]]>
+                </query>
+            </loader>
+        </collection>
+        <collection id="soldProductsDc" class="com.company.marketplace.entity.SoldProduct">
+            <view extends="view-soldProduct-with-shop"/>
+            <loader id="soldProductsDl">
+                <query>
+                    <![CDATA[select e from marketplace_SoldProduct e]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="600" width="800"/>
     <layout spacing="true">
@@ -24,7 +44,7 @@
                         <textField id="discountField" property="discount" datatype="int" maxLength="2"/>
                     </column>
                 </form>
-                <table id="productsTable" dataContainer="productsDc" width="100%" height="400px">
+                <table id="productsTable" dataContainer="productsDc" width="100%" height="550px">
                     <actions>
                         <action id="add" type="create">
                             <properties>
@@ -38,7 +58,7 @@
                     <columns>
                         <column id="product"/>
                         <column id="quantity"/>
-                        <column id="product.price"/>
+                        <column id="price"/>
                     </columns>
                     <buttonsPanel spacing="true">
                         <button action="productsTable.add"/>
@@ -52,7 +72,15 @@
                     <button id="closeBtn" action="windowClose"/>
                 </hbox>
             </tab>
-            <tab id="tab2" caption="msg://tab2"/>
+            <tab id="tab2" caption="msg://tab2" spacing="true">
+                <table id="saleProductsTable" height="450px" width="100%" dataContainer="saleProductsDc">
+                    <columns>
+                        <column id="product"/>
+                        <column id="price"/>
+                        <column id="product.price"/>
+                    </columns>
+                </table>
+            </tab>
         </tabSheet>
     </layout>
 </window>

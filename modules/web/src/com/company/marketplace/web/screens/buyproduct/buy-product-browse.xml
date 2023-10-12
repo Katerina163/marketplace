@@ -33,8 +33,9 @@
                 <action id="remove" type="remove"/>
             </actions>
             <columns>
-                <column id="quantity"/>
                 <column id="product"/>
+                <column id="quantity"/>
+                <column id="price"/>
                 <column id="onlineOrder"/>
             </columns>
             <rowsCount/>

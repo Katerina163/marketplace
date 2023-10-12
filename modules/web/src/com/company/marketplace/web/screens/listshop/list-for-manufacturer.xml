@@ -13,7 +13,7 @@
             <loader id="listProductDl"/>
         </instance>
         <collection id="soldProductsDc" class="com.company.marketplace.entity.SoldProduct">
-            <view extends="view-soldProduct-with-products"/>
+            <view extends="view-soldProduct-with-product"/>
             <loader id="soldProductsDl">
                 <query>
                     <![CDATA[select e from marketplace_SoldProduct e where e.quantity < :quantity and e.shop = :shop and e.product.manufacturer = :manufacturer]]>

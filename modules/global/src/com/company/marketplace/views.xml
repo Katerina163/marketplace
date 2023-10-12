@@ -22,7 +22,7 @@
             <property name="quantity"/>
         </property>
     </view>
-    <view entity="marketplace_SoldProduct" name="view-soldProduct-with-products" extends="_local">
+    <view entity="marketplace_SoldProduct" name="view-soldProduct-with-product" extends="_local">
         <property name="product" view="_minimal"/>
     </view>
     <view entity="marketplace_Shop" name="view-shop-with-all" extends="_local">

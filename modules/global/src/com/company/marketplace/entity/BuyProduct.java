@@ -6,6 +6,7 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
+import java.math.BigDecimal;
 
 @Table(name = "MARKETPLACE_BUY_PRODUCT")
 @Entity(name = "marketplace_BuyProduct")
@@ -18,6 +19,10 @@ public class BuyProduct extends StandardEntity {
     @Positive
     private Long quantity;
 
+    @Column(name = "PRICE")
+    @NotNull
+    private BigDecimal price;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SOLD_PRODUCT_ID")
     private SoldProduct product;
@@ -26,6 +31,14 @@ public class BuyProduct extends StandardEntity {
     @JoinColumn(name = "ONLINE_ORDER_ID")
     @NotNull
     private OnlineOrder onlineOrder;
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
 
     public OnlineOrder getOnlineOrder() {
         return onlineOrder;

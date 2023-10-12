@@ -1,7 +1,7 @@
 package com.company.marketplace.web.screens.buyproduct;
 
-import com.haulmont.cuba.gui.screen.*;
 import com.company.marketplace.entity.BuyProduct;
+import com.haulmont.cuba.gui.screen.*;
 
 @UiController("marketplace_BuyProduct.browse")
 @UiDescriptor("buy-product-browse.xml")

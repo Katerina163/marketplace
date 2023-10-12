@@ -54,7 +54,7 @@
                     <button id="colorPriceBtn" caption="msg://button.show" align="BOTTOM_CENTER"/>
                 </hbox>
                 <groupBox id="productsBox" caption="msg://com.company.marketplace.entity/Shop.products">
-                    <table id="productsTable" dataContainer="productsDc" width="100%" height="200px">
+                    <table id="productsTable" dataContainer="productsDc" width="100%" height="450px">
                         <actions>
                             <action id="create" type="create"/>
                             <action id="edit" type="edit"/>
