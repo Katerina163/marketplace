@@ -27,28 +27,44 @@ public class StatisticShopEdit extends StandardLookup<StatisticShop> {
     private TextField<String> textNetworkField;
     @Inject
     private PickerField<TradingNetwork> networkField;
+    @Inject
+    private TextField<String> textOnlineShopField;
+    @Inject
+    private TextField<String> textOnlineNetworkField;
 
     @Subscribe("calculateShopBtn")
     public void onCalculateShopBtnClick(Button.ClickEvent event) {
         String str;
+        String online;
         if (Objects.nonNull(shopField.getValue())) {
             Long result = statisticService.calculateSalesShop(shopField.getValue());
             str = result != -1 ? result.toString() : "Продажи отсутствуют";
+
+            Long resultOnl = statisticService.calculateOnlineSalesShop(shopField.getValue());
+            online = resultOnl != -1 ? resultOnl.toString() : "Онлайн продажи отсутствуют";
         } else {
             str = "Необходимо выбрать магазин";
+            online = str;
         }
         textShopField.setValue(str);
+        textOnlineShopField.setValue(online);
     }
 
     @Subscribe("calculateNetworkBtn")
     public void onCalculateNetworkBtnClick(Button.ClickEvent event) {
         String str;
+        String online;
         if (Objects.nonNull(networkField.getValue())) {
             Long result = statisticService.calculateSalesTradingNetwork(networkField.getValue());
             str = result != -1 ? result.toString() : "Продажи отсутствуют";
+
+            Long resultOnl = statisticService.calculateOnlineSalesTradingNetwork(networkField.getValue());
+            online = resultOnl != -1 ? resultOnl.toString() : "Онлайн продажи отсутствуют";
         } else {
             str = "Необходимо выбрать сеть";
+            online = str;
         }
         textNetworkField.setValue(str);
+        textOnlineNetworkField.setValue(online);
     }
 }

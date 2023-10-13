@@ -20,8 +20,25 @@ public class StatisticServiceBean implements StatisticService {
     }
 
     @Override
+    public Long calculateOnlineSalesShop(Shop shop) {
+        String sql = "select sum(bp.quantity) from marketplace_BuyProduct bp "
+                + "join bp.product p "
+                + "where p.shop = :shop";
+        return calculate(sql, "shop", shop);
+    }
+
+    @Override
     public Long calculateSalesTradingNetwork(TradingNetwork network) {
         String sql = "select sum(p.quantity) from marketplace_PurchasedProducts p "
+                + "join p.shop s "
+                + "where s.tradingNetwork = :network";
+        return calculate(sql, "network", network);
+    }
+
+    @Override
+    public Long calculateOnlineSalesTradingNetwork(TradingNetwork network) {
+        String sql = "select sum(bp.quantity) from marketplace_BuyProduct bp "
+                + "join bp.product p "
                 + "join p.shop s "
                 + "where s.tradingNetwork = :network";
         return calculate(sql, "network", network);

@@ -9,4 +9,8 @@ public interface StatisticService {
     Long calculateSalesShop(Shop shop);
 
     Long calculateSalesTradingNetwork(TradingNetwork network);
+
+    Long calculateOnlineSalesShop(Shop shop);
+
+    Long calculateOnlineSalesTradingNetwork(TradingNetwork network);
 }

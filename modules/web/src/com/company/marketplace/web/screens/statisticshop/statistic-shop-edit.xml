@@ -37,6 +37,7 @@
                     <button id="calculateShopBtn" caption="msg://button.calc"/>
                 </hbox>
                 <textField caption="msg://text.field" id="textShopField" editable="false"/>
+                <textField caption="msg://text.online.field" id="textOnlineShopField" editable="false"/>
             </tab>
             <tab id="tab2" caption="msg://sales.tab2" spacing="true" margin="true">
                 <form id="form2" dataContainer="statisticTradingNetworkDc">
@@ -53,6 +54,7 @@
                     <button id="calculateNetworkBtn" caption="msg://button.calc"/>
                 </hbox>
                 <textField caption="msg://text.field" id="textNetworkField" editable="false"/>
+                <textField caption="msg://text.online.field" id="textOnlineNetworkField" editable="false"/>
             </tab>
         </tabSheet>
     </layout>
