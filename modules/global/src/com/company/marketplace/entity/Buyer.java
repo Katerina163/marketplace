@@ -2,8 +2,6 @@ package com.company.marketplace.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.cuba.core.entity.annotation.OnDeleteInverse;
-import com.haulmont.cuba.core.global.DeletePolicy;
 import com.haulmont.cuba.security.entity.User;
 
 import javax.persistence.*;
@@ -30,7 +28,6 @@ public class Buyer extends StandardEntity {
 
     @JoinColumn(name = "USER_ID")
     @OneToOne(fetch = FetchType.LAZY)
-    @OnDeleteInverse(DeletePolicy.CASCADE)
     private User user;
 
     public User getUser() {

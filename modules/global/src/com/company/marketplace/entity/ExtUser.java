@@ -1,16 +1,18 @@
 package com.company.marketplace.entity;
 
-import com.haulmont.chile.core.annotations.NamePattern;
-import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.Extends;
 import com.haulmont.cuba.core.entity.annotation.OnDelete;
 import com.haulmont.cuba.core.global.DeletePolicy;
+import com.haulmont.cuba.security.entity.User;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 
-@Table(name = "MARKETPLACE_EXT_USER")
 @Entity(name = "marketplace_ExtUser")
-@NamePattern("%s|buyer")
-public class ExtUser extends StandardEntity {
+@Extends(User.class)
+public class ExtUser extends User {
     private static final long serialVersionUID = 1189374763821784650L;
 
     @OnDelete(DeletePolicy.CASCADE)
