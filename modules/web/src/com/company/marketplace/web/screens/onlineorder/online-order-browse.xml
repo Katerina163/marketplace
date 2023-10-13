@@ -7,7 +7,9 @@
     <data readOnly="true">
         <collection id="onlineOrdersDc"
                     class="com.company.marketplace.entity.OnlineOrder">
-            <view extends="_local"/>
+            <view extends="_local">
+                <property name="products" view="view-buyProduct-with-product-price"/>
+            </view>
             <loader id="onlineOrdersDl">
                 <query>
                     <![CDATA[select e from marketplace_OnlineOrder e]]>

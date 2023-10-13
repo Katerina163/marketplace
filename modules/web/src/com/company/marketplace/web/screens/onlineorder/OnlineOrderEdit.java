@@ -122,7 +122,9 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
                 .withLaunchMode(OpenMode.DIALOG)
                 .build();
         screen.addAfterCloseListener(afterCloseEvent -> {
-            calculateAmountWithSale();
+            if (afterCloseEvent.closedWith(StandardOutcome.COMMIT)) {
+                calculateAmountWithSale();
+            }
         });
         screen.show();
     }
