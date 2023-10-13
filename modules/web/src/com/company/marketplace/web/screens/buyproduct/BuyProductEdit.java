@@ -5,6 +5,8 @@ import com.company.marketplace.entity.SoldProduct;
 import com.haulmont.cuba.gui.components.HasValue;
 import com.haulmont.cuba.gui.screen.*;
 
+import java.util.Objects;
+
 @UiController("marketplace_BuyProduct.edit")
 @UiDescriptor("buy-product-edit.xml")
 @EditedEntityContainer("buyProductDc")
@@ -13,6 +15,7 @@ public class BuyProductEdit extends StandardEditor<BuyProduct> {
 
     @Subscribe("productField")
     public void onProductFieldValueChange(HasValue.ValueChangeEvent<SoldProduct> event) {
-        getEditedEntity().setPrice(event.getValue().getPrice());
+        if (Objects.isNull(getEditedEntity().getPrice()))
+            getEditedEntity().setPrice(event.getValue().getPrice());
     }
 }

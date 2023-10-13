@@ -5,6 +5,7 @@ import com.haulmont.cuba.core.app.UniqueNumbersService;
 import com.haulmont.cuba.core.global.LoadContext;
 import com.haulmont.cuba.gui.RemoveOperation;
 import com.haulmont.cuba.gui.ScreenBuilders;
+import com.haulmont.cuba.gui.components.HasValue;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.components.TextField;
 import com.haulmont.cuba.gui.model.CollectionContainer;
@@ -18,6 +19,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
@@ -50,6 +52,13 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
         order.setAmount(new BigDecimal(0));
         order.setDiscount(0);
         discountField.setValue(0);
+    }
+
+    @Subscribe("discountField")
+    public void onDiscountFieldValueChange(HasValue.ValueChangeEvent<Integer> event) {
+        if (Objects.nonNull(event.getPrevValue()) && Objects.nonNull(getEditedEntity().getProducts())) {
+            calculateAmountWithSale();
+        }
     }
 
     @Install(to = "productsTable.add", subject = "afterCloseHandler")
@@ -114,7 +123,7 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
                 .newEntity()
                 .withInitializer(buyProduct -> {
                     buyProduct.setOnlineOrder(getEditedEntity());
-                    buyProduct.setQuantity(1L);
+                    buyProduct.setQuantity(1);
                     buyProduct.setProduct(product);
                     int sale = LocalDate.now().getDayOfMonth();
                     buyProduct.setPrice(BigDecimal.valueOf(product.getPrice().longValue() * (100 - sale) / 100));

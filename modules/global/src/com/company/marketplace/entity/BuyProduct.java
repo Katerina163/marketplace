@@ -2,12 +2,14 @@ package com.company.marketplace.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
+import com.haulmont.cuba.core.entity.annotation.PublishEntityChangedEvents;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.math.BigDecimal;
 
+@PublishEntityChangedEvents
 @Table(name = "MARKETPLACE_BUY_PRODUCT")
 @Entity(name = "marketplace_BuyProduct")
 @NamePattern("%s %s|product,quantity")
@@ -17,7 +19,7 @@ public class BuyProduct extends StandardEntity {
     @NotNull
     @Column(name = "QUANTITY", nullable = false)
     @Positive
-    private Long quantity;
+    private Integer quantity;
 
     @Column(name = "PRICE")
     @NotNull
@@ -31,6 +33,14 @@ public class BuyProduct extends StandardEntity {
     @JoinColumn(name = "ONLINE_ORDER_ID")
     @NotNull
     private OnlineOrder onlineOrder;
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
 
     public BigDecimal getPrice() {
         return price;
@@ -56,11 +66,4 @@ public class BuyProduct extends StandardEntity {
         this.product = product;
     }
 
-    public Long getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Long quantity) {
-        this.quantity = quantity;
-    }
 }
