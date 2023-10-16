@@ -1,8 +1,6 @@
 package com.company.marketplace.core.role;
 
-import com.company.marketplace.entity.Basket;
-import com.company.marketplace.entity.PurchasedProducts;
-import com.company.marketplace.entity.SoldProduct;
+import com.company.marketplace.entity.*;
 import com.haulmont.cuba.security.app.role.AnnotatedRoleDefinition;
 import com.haulmont.cuba.security.app.role.annotation.EntityAccess;
 import com.haulmont.cuba.security.app.role.annotation.EntityAttributeAccess;
@@ -23,6 +21,10 @@ public class BuyerRole extends AnnotatedRoleDefinition {
             operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
     @EntityAccess(entityClass = SoldProduct.class,
             operations = {EntityOp.READ})
+    @EntityAccess(entityClass = OnlineOrder.class,
+            operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
+    @EntityAccess(entityClass = BuyProduct.class,
+            operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
     @Override
     public EntityPermissionsContainer entityPermissions() {
         return super.entityPermissions();
@@ -31,13 +33,19 @@ public class BuyerRole extends AnnotatedRoleDefinition {
     @EntityAttributeAccess(entityClass = Basket.class, modify = "*")
     @EntityAttributeAccess(entityClass = PurchasedProducts.class, modify = "*")
     @EntityAttributeAccess(entityClass = SoldProduct.class, view = "*")
+    @EntityAttributeAccess(entityClass = OnlineOrder.class, modify = "*")
+    @EntityAttributeAccess(entityClass = BuyProduct.class, modify = "*")
     @Override
     public EntityAttributePermissionsContainer entityAttributePermissions() {
         return super.entityAttributePermissions();
     }
 
-    @ScreenAccess(screenIds = {"application-marketplace3", "marketplace_Basket.browse", "marketplace_Basket.edit",
-            "marketplace_SoldProduct.browse", "marketplace_PurchasedProducts.browse", "marketplace_PurchasedProducts.edit",
+    @ScreenAccess(screenIds = {"application-marketplace3",
+            "marketplace_Basket.browse", "marketplace_Basket.edit",
+            "marketplace_SoldProduct.browse",
+            "marketplace_PurchasedProducts.browse", "marketplace_PurchasedProducts.edit",
+            "marketplace_OnlineOrder.browse", "marketplace_OnlineOrder.edit",
+            "marketplace_BuyProduct.browse", "marketplace_BuyProduct.edit",
             "settings"})
     @Override
     public ScreenPermissionsContainer screenPermissions() {
