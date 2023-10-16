@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 
 @MetaClass(name = "marketplace_Address")
 @Embeddable
-@NamePattern("%s %s %s|street,house,city")
+@NamePattern("%s, %s, %s|city, street,house")
 public class Address extends EmbeddableEntity {
     private static final long serialVersionUID = -3832397514645694334L;
 
