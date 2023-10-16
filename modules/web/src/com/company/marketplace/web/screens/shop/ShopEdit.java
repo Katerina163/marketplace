@@ -3,9 +3,8 @@ package com.company.marketplace.web.screens.shop;
 import com.company.marketplace.config.ColorConfig;
 import com.company.marketplace.entity.Shop;
 import com.company.marketplace.entity.SoldProduct;
-import com.haulmont.cuba.gui.components.Button;
-import com.haulmont.cuba.gui.components.Table;
-import com.haulmont.cuba.gui.components.TextField;
+import com.company.marketplace.service.ShopService;
+import com.haulmont.cuba.gui.components.*;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
@@ -22,6 +21,8 @@ public class ShopEdit extends StandardEditor<Shop> {
     private TextField<Integer> colorPrice;
     @Inject
     private Table<SoldProduct> productsTable;
+    @Inject
+    private ShopService shopService;
 
     @Subscribe
     public void onInit(InitEvent event) {
@@ -42,5 +43,13 @@ public class ShopEdit extends StandardEditor<Shop> {
             return "colored-grade";
         }
         return null;
+    }
+
+    @Override
+    protected void validateAdditionalRules(ValidationErrors errors) {
+        if (!shopService.checkGeocoordinates(getEditedEntity())) {
+            errors.add("Неправильный адрес");
+        }
+        super.validateAdditionalRules(errors);
     }
 }
