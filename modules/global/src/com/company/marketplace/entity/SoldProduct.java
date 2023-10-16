@@ -17,8 +17,8 @@ public class SoldProduct extends StandardEntity {
     private static final long serialVersionUID = -8284431251793090384L;
 
     @NotNull
-    @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "PRODUCT_ID")
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Product product;
 
     @NotNull

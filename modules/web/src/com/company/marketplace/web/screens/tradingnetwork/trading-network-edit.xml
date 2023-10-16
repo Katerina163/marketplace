@@ -3,33 +3,64 @@
         caption="msg://tradingNetworkEdit.caption"
         focusComponent="form"
         messagesPack="com.company.marketplace.web.screens.tradingnetwork"
-        xmlns:maps="http://schemas.haulmont.com/maps/0.1/ui-component.xsd">
+        xmlns:maps="http://schemas.haulmont.com/maps/0.1/ui-component.xsd"
+        xmlns:chart="http://schemas.haulmont.com/charts/charts.xsd">
     <data>
         <instance id="tradingNetworkDc"
                   class="com.company.marketplace.entity.TradingNetwork">
             <view extends="_local"/>
             <loader/>
         </instance>
+        <collection id="chartShopsDc" class="com.company.marketplace.entity.ChartShop">
+            <view extends="_local"/>
+            <loader id="chartShopsDl">
+                <query>
+                    <![CDATA[select e from marketplace_Product e]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <dialogMode height="600"
                 width="800"/>
     <layout spacing="true">
-        <maps:geoMap id="map" width="100%" height="100%" center="50.1371891, 53.1985782" zoom="12">
-            <maps:layers>
-                <maps:tile id="titleLayer" tileProvider="maps_OpenStreetMap"/>
-            </maps:layers>
-        </maps:geoMap>
-        <vbox spacing="true">
-            <form id="form" dataContainer="tradingNetworkDc">
-                <column width="350px">
-                    <textField id="nameField" property="name"/>
-                    <textField id="fullNameField" property="fullName"/>
-                </column>
-            </form>
-            <hbox id="editActions" spacing="true">
-                <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
-                <button id="closeBtn" action="windowClose"/>
-            </hbox>
-        </vbox>
+        <tabSheet width="100%" height="100%">
+            <tab id="tab1" caption="msg://tab1">
+                <vbox spacing="true">
+                    <form id="form" dataContainer="tradingNetworkDc">
+                        <column width="350px">
+                            <textField id="nameField" property="name"/>
+                            <textField id="fullNameField" property="fullName"/>
+                        </column>
+                    </form>
+                    <hbox id="editActions" spacing="true">
+                        <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
+                        <button id="closeBtn" action="windowClose"/>
+                    </hbox>
+                </vbox>
+            </tab>
+            <tab id="tab2" caption="msg://tab2">
+                <maps:geoMap id="map" width="100%" height="100%" center="50.1371891, 53.1985782" zoom="12">
+                    <maps:layers>
+                        <maps:tile id="titleLayer" tileProvider="maps_OpenStreetMap"/>
+                    </maps:layers>
+                </maps:geoMap>
+            </tab>
+            <tab id="tab3" caption="msg://tab3">
+                <vbox>
+                    <pickerField id="productField" metaClass="marketplace_Product" caption="msg://product"/>
+                    <chart:pieChart id="pieChart"
+                                    dataContainer="chartShopsDc"
+                                    titleField="name"
+                                    valueField="count">
+                        <chart:legend autoMargins="false"
+                                      marginRight="80"
+                                      markerType="CIRCLE"
+                                      position="RIGHT"/>
+                        <chart:balloon fixedPosition="true"/>
+                        <chart:export/>
+                    </chart:pieChart>
+                </vbox>
+            </tab>
+        </tabSheet>
     </layout>
 </window>

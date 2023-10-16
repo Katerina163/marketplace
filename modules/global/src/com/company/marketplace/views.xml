@@ -13,7 +13,9 @@
         <property name="products" view="_minimal"/>
     </view>
     <view entity="marketplace_Shop" name="view-shop-with-products" extends="_local">
-        <property name="products" view="_minimal"/>
+        <property name="products" view="_minimal">
+            <property name="quantity"/>
+        </property>
     </view>
     <view entity="marketplace_PurchasedProducts" name="view-purchasedProducts-with-product" extends="_local">
         <property name="basket" view="_minimal"/>
@@ -45,6 +47,13 @@
             <property name="address" view="_minimal">
                 <property name="lat"/>
                 <property name="lng"/>
+            </property>
+        </property>
+    </view>
+    <view entity="marketplace_TradingNetwork" name="view-tradingNetwork-shop-with-products" extends="_local">
+        <property name="shops" view="_minimal">
+            <property name="products" view="_minimal">
+                <property name="quantity"/>
             </property>
         </property>
     </view>
