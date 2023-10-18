@@ -2,7 +2,6 @@ package com.company.marketplace.entity;
 
 import com.haulmont.chile.core.annotations.NamePattern;
 import com.haulmont.cuba.core.entity.StandardEntity;
-import com.haulmont.cuba.security.entity.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -25,18 +24,6 @@ public class Buyer extends StandardEntity {
     @Column(name = "EMAIL")
     @Email
     private String email;
-
-    @JoinColumn(name = "USER_ID")
-    @OneToOne(fetch = FetchType.LAZY)
-    private User user;
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     public String getEmail() {
         return email;

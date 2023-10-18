@@ -72,4 +72,10 @@
             <property name="quantity"/>
         </property>
     </view>
+    <view entity="marketplace_ExtUser" name="user.browse" extends="user.browse">
+        <property name="buyer" view="_local"/>
+    </view>
+    <view entity="marketplace_ExtUser" name="user.edit" extends="user.edit">
+        <property name="buyer" view="_local"/>
+    </view>
 </views>

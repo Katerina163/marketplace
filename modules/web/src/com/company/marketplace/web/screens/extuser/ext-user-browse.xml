@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        xmlns:ext="http://schemas.haulmont.com/cuba/window-ext.xsd"
+        class="com.company.marketplace.web.screens.extuser.ExtUserBrowser"
+        extends="com/haulmont/cuba/gui/app/security/user/browse/user-browse.xml"
+        messagesPack="com.company.marketplace.web.screens.extuser">
+    <layout>
+        <groupTable>
+            <columns>
+                <column ext:index="2" id="buyer"/>
+            </columns>
+            <rows/>
+        </groupTable>
+    </layout>
+</window>
