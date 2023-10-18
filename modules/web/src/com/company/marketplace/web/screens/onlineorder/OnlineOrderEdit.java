@@ -2,7 +2,9 @@ package com.company.marketplace.web.screens.onlineorder;
 
 import com.company.marketplace.entity.*;
 import com.haulmont.cuba.core.app.UniqueNumbersService;
+import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;
+import com.haulmont.cuba.core.global.UserSessionSource;
 import com.haulmont.cuba.gui.RemoveOperation;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.HasValue;
@@ -11,6 +13,7 @@ import com.haulmont.cuba.gui.components.TextField;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
+import com.haulmont.cuba.security.entity.User;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
@@ -42,11 +45,20 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
     private Table<BuyProduct> productsTable;
     @Inject
     private ScreenBuilders screenBuilders;
+    @Inject
+    private UserSessionSource userSessionSource;
+    @Inject
+    private DataManager dataManager;
+
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<OnlineOrder> event) {
         OnlineOrder order = event.getEntity();
-//        event.getEntity().setBuyer(user);
+        User user = userSessionSource.getUserSession().getUser();
+        ExtUser u = (ExtUser) dataManager.reload(user, "user.edit");
+        if (Objects.isNull(u.getBuyer())) {
+            this.closeWithDiscard();
+        }
         order.setNumber(String.valueOf(uniqueNumbersService.getNextNumber("sequenceForOnlineOrder")));
         order.setStatus(OrderStatus.PROCESSING);
         order.setAmount(new BigDecimal(0));
@@ -100,6 +112,9 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
     private List<SaleProduct> saleProductsDlLoadDelegate(LoadContext<SaleProduct> loadContext) {
         soldProductsDl.load();
         List<SoldProduct> soldProducts = soldProductsDc.getItems();
+        if (soldProducts.isEmpty()) {
+            this.closeWithDiscard();
+        }
         int sizeSaleProducts = ThreadLocalRandom.current().nextInt(soldProducts.size());
         int[] indexSoldProduct = ThreadLocalRandom.current().ints(0, soldProducts.size()).distinct().limit(sizeSaleProducts).toArray();
         int sale = LocalDate.now().getDayOfMonth();
