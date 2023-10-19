@@ -5,6 +5,7 @@ import com.haulmont.cuba.core.app.UniqueNumbersService;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;
 import com.haulmont.cuba.core.global.UserSessionSource;
+import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.RemoveOperation;
 import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.HasValue;
@@ -49,7 +50,8 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
     private UserSessionSource userSessionSource;
     @Inject
     private DataManager dataManager;
-
+    @Inject
+    private Notifications notifications;
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<OnlineOrder> event) {
@@ -57,6 +59,10 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
         User user = userSessionSource.getUserSession().getUser();
         ExtUser u = (ExtUser) dataManager.reload(user, "user.edit");
         if (Objects.isNull(u.getBuyer())) {
+            notifications.create(Notifications.NotificationType.WARNING)
+                    .withDescription("Отсутствует покупатель")
+                    .withPosition(Notifications.Position.MIDDLE_CENTER)
+                    .show();
             this.closeWithDiscard();
         }
         order.setNumber(String.valueOf(uniqueNumbersService.getNextNumber("sequenceForOnlineOrder")));
@@ -113,6 +119,10 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
         soldProductsDl.load();
         List<SoldProduct> soldProducts = soldProductsDc.getItems();
         if (soldProducts.isEmpty()) {
+            notifications.create(Notifications.NotificationType.WARNING)
+                    .withDescription("Отсутствуют товары")
+                    .withPosition(Notifications.Position.MIDDLE_CENTER)
+                    .show();
             this.closeWithDiscard();
         }
         int sizeSaleProducts = ThreadLocalRandom.current().nextInt(soldProducts.size());
