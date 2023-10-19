@@ -18,8 +18,8 @@ import javax.inject.Inject;
 import java.util.Objects;
 import java.util.UUID;
 
-@Component("marketplace_PurchasedProductsChangedListener")
-public class PurchasedProductsChangedListener {
+@Component("marketplace_ChangedProductsListener")
+public class ChangedProductsListener {
     @Inject
     private DataManager dataManager;
     @Inject

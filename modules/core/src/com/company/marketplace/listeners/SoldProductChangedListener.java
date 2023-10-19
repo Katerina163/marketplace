@@ -17,7 +17,7 @@ public class SoldProductChangedListener {
     private TransactionalDataManager tdm;
 
     @EventListener
-    public void onSoldProductAfterCommit1(EntityChangedEvent<SoldProduct, UUID> event) {
+    public void onSoldProductAfterCommit(EntityChangedEvent<SoldProduct, UUID> event) {
         if ((event.getType().equals(EntityChangedEvent.Type.UPDATED) && event.getChanges().isChanged("price"))
                 || event.getType().equals(EntityChangedEvent.Type.CREATED)) {
             SoldProduct sp = tdm.load(event.getEntityId()).view("view-soldProduct-with-shop").one();
