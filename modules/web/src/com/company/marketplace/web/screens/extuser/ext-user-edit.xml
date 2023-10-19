@@ -4,6 +4,9 @@
         class="com.company.marketplace.web.screens.extuser.ExtUserEditor"
         extends="com/haulmont/cuba/gui/app/security/user/edit/user-edit.xml"
         messagesPack="com.company.marketplace.web.screens.extuser">
+    <dsContext>
+        <datasource id="userDs" class="com.company.marketplace.entity.ExtUser"/>
+    </dsContext>
     <layout>
         <groupBox id="propertiesBox">
             <grid id="propertiesGrid">
@@ -11,7 +14,9 @@
                     <row id="propertiesRow">
                         <fieldGroup id="fieldGroupLeft">
                             <column>
-                                <field id="buyer" property="buyer"/>
+                                <field id="buyer" property="buyer">
+                                    <button id="buyerButton" caption="msg://buyer"/>
+                                </field>
                             </column>
                         </fieldGroup>
                     </row>
