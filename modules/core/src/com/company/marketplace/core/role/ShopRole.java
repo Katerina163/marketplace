@@ -31,6 +31,10 @@ public class ShopRole extends AnnotatedRoleDefinition {
             operations = {EntityOp.READ})
     @EntityAccess(entityClass = StatisticTradingNetwork.class,
             operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
+    @EntityAccess(entityClass = Basket.class,
+            operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
+    @EntityAccess(entityClass = PurchasedProducts.class,
+            operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
     @Override
     public EntityPermissionsContainer entityPermissions() {
         return super.entityPermissions();
@@ -45,16 +49,20 @@ public class ShopRole extends AnnotatedRoleDefinition {
     @EntityAttributeAccess(entityClass = Product.class, view = "*")
     @EntityAttributeAccess(entityClass = PriceHistory.class, view = "*")
     @EntityAttributeAccess(entityClass = StatisticTradingNetwork.class, modify = "*")
+    @EntityAttributeAccess(entityClass = Basket.class, modify = "*")
+    @EntityAttributeAccess(entityClass = PurchasedProducts.class, modify = "*")
     @Override
     public EntityAttributePermissionsContainer entityAttributePermissions() {
         return super.entityAttributePermissions();
     }
 
-    @ScreenAccess(screenIds = {"application-marketplace", "settings",
+    @ScreenAccess(screenIds = {"application-marketplace", "application-marketplace3", "settings",
             "marketplace_TradingNetwork.browse", "marketplace_TradingNetwork.edit",
             "marketplace_Shop.browse", "marketplace_Shop.edit",
             "marketplace_SoldProduct.browse", "marketplace_SoldProduct.edit",
             "marketplace_PriceHistory.browse", "marketplace_StatisticShop.edit",
+            "marketplace_Basket.browse", "marketplace_Basket.edit",
+            "marketplace_PurchasedProducts.browse", "marketplace_PurchasedProducts.edit",
             "marketplace_Product.browse"})
     @Override
     public ScreenPermissionsContainer screenPermissions() {
