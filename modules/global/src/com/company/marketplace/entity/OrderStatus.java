@@ -6,11 +6,11 @@ import javax.annotation.Nullable;
 
 public enum OrderStatus implements EnumClass<String> {
 
-    PROCESSING("in processing"),
-    DELIVERY("in delivery"),
-    DELIVERED("delivered");
+    PROCESSING("In processing"),
+    DELIVERY("In delivery"),
+    DELIVERED("Delivered");
 
-    private String id;
+    private final String id;
 
     OrderStatus(String value) {
         this.id = value;

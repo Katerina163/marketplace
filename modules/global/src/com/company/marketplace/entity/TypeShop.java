@@ -10,7 +10,7 @@ public enum TypeShop implements EnumClass<String> {
     SUPERMARKET("Supermarket"),
     HYPERMARKET("Hypermarket");
 
-    private String id;
+    private final String id;
 
     TypeShop(String value) {
         this.id = value;
