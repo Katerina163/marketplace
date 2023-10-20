@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<app-component xmlns="http://schemas.haulmont.com/cuba/app-component.xsd"
+               dependsOn="com.haulmont.addon.maps, com.haulmont.charts, com.haulmont.reports, com.haulmont.cuba">
+
+    <module name="global" blocks="*">
+        <artifact name="market-global" appJar="true"/>
+
+        <property name="cuba.persistenceConfig" value="+com/company/marketplace/persistence.xml"/>
+        <property name="cuba.metadataConfig" value="+com/company/marketplace/metadata.xml"/>
+        <property name="cuba.viewsConfig" value="+com/company/marketplace/views.xml"/>
+    </module>
+    <module name="core" dependsOn="global" blocks="core">
+        <artifact name="market-core" appJar="true"/>
+        <artifact name="market-core" classifier="db" ext="zip" configuration="dbscripts"/>
+
+        <property name="cuba.springContextConfig" value="+com/company/marketplace/spring.xml"/>
+        <property name="cuba.mainMessagePack" value="+com.company.marketplace.core"/>
+    </module>
+    <module name="web" dependsOn="global" blocks="web">
+        <artifact name="market-web" appJar="true"/>
+        <artifact name="market-web" classifier="web" ext="zip" configuration="webcontent"/>
+        <artifact name="market-web-toolkit" appJar="true" classifier="client" ext="jar"
+                  skipIfExists="web-toolkit"/>
+        <artifact name="market-web" ext="jar" configuration="themes" classifier="themes"/>
+
+        <property name="cuba.springContextConfig" value="+com/company/marketplace/web-spring.xml"/>
+        <property name="cuba.dispatcherSpringContextConfig" value="+com/company/marketplace/web-dispatcher-spring.xml"/>
+        <property name="cuba.windowConfig" value="+com/company/marketplace/web-screens.xml"/>
+        <property name="cuba.menuConfig" value="+com/company/marketplace/web-menu.xml"/>
+        <property name="cuba.permissionConfig" value="+com/company/marketplace/web-permissions.xml"/>
+        <property name="cuba.mainMessagePack" value="+com.company.marketplace.web"/>
+        <property name="cuba.web.widgetSet" value="com.company.marketplace.web.toolkit.ui.AppWidgetSet"/>
+    </module>
+    <module name="web-toolkit" dependsOn="web">
+        <artifact name="market-web-toolkit"/>
+    </module>
+</app-component>
