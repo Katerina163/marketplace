@@ -10,6 +10,9 @@ public class PurchasedProductsServiceBean implements PurchasedProductsService {
 
     @Override
     public boolean checkingQuantityProducts(PurchasedProducts product) {
+        if (Objects.isNull(product.getProduct())) {
+            return false;
+        }
         return product.getProduct().getQuantity() >= product.getQuantity();
     }
 
