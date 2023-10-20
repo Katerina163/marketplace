@@ -15,7 +15,8 @@ public class BuyProductEdit extends StandardEditor<BuyProduct> {
 
     @Subscribe("productField")
     public void onProductFieldValueChange(HasValue.ValueChangeEvent<SoldProduct> event) {
-        if (Objects.isNull(getEditedEntity().getPrice()))
+        if (Objects.isNull(getEditedEntity().getPrice())) {
             getEditedEntity().setPrice(event.getValue().getPrice());
+        }
     }
 }

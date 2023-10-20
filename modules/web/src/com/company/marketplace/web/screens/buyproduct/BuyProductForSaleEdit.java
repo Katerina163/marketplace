@@ -18,7 +18,6 @@ public class BuyProductForSaleEdit extends StandardEditor<BuyProduct> {
     @Inject
     private Button commitAndCloseBtn;
 
-
     @Override
     protected void validateAdditionalRules(ValidationErrors errors) {
         if (buyProductService.checkAnotherProductWithSale(getEditedEntity())) {

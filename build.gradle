@@ -16,6 +16,7 @@ buildscript {
                 password("${rootProject['premiumRepoPass']}")
             }
         }
+        apply plugin: 'checkstyle'
     }
     dependencies {
         classpath "com.haulmont.gradle:cuba-plugin:$cubaVersion"

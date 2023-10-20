@@ -101,7 +101,8 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
             amount = amount.multiply(BigDecimal.valueOf(100 - sale))
                     .divide(BigDecimal.valueOf(100), RoundingMode.DOWN);
         }
-        BigDecimal amountWithSale = calculateAmount(buyProduct -> !buyProduct.getPrice().equals(buyProduct.getProduct().getPrice()));
+        BigDecimal amountWithSale = calculateAmount(buyProduct ->
+                !buyProduct.getPrice().equals(buyProduct.getProduct().getPrice()));
         getEditedEntity().setAmount(amount.add(amountWithSale));
         amountField.setValue(amount.add(amountWithSale));
     }
@@ -126,7 +127,11 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
             this.closeWithDiscard();
         }
         int sizeSaleProducts = ThreadLocalRandom.current().nextInt(soldProducts.size());
-        int[] indexSoldProduct = ThreadLocalRandom.current().ints(0, soldProducts.size()).distinct().limit(sizeSaleProducts).toArray();
+        int[] indexSoldProduct = ThreadLocalRandom.current()
+                .ints(0, soldProducts.size())
+                .distinct()
+                .limit(sizeSaleProducts)
+                .toArray();
         int sale = LocalDate.now().getDayOfMonth();
         List<SaleProduct> collection = new ArrayList<>(sizeSaleProducts);
         for (int i = 0; i < sizeSaleProducts; i++) {
