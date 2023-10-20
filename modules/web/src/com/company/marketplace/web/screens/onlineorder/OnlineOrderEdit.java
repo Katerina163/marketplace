@@ -58,13 +58,7 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
         OnlineOrder order = event.getEntity();
         User user = userSessionSource.getUserSession().getUser();
         ExtUser u = (ExtUser) dataManager.reload(user, "user.edit");
-        if (Objects.isNull(u.getBuyer())) {
-            notifications.create(Notifications.NotificationType.WARNING)
-                    .withDescription("Отсутствует покупатель")
-                    .withPosition(Notifications.Position.MIDDLE_CENTER)
-                    .show();
-            this.closeWithDiscard();
-        }
+        order.setBuyer(u.getBuyer());
         order.setNumber(String.valueOf(uniqueNumbersService.getNextNumber("sequenceForOnlineOrder")));
         order.setStatus(OrderStatus.PROCESSING);
         order.setAmount(new BigDecimal(0));
@@ -119,13 +113,6 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
     private List<SaleProduct> saleProductsDlLoadDelegate(LoadContext<SaleProduct> loadContext) {
         soldProductsDl.load();
         List<SoldProduct> soldProducts = soldProductsDc.getItems();
-        if (soldProducts.isEmpty()) {
-            notifications.create(Notifications.NotificationType.WARNING)
-                    .withDescription("Отсутствуют товары")
-                    .withPosition(Notifications.Position.MIDDLE_CENTER)
-                    .show();
-            this.closeWithDiscard();
-        }
         int sizeSaleProducts = ThreadLocalRandom.current().nextInt(soldProducts.size());
         int[] indexSoldProduct = ThreadLocalRandom.current()
                 .ints(0, soldProducts.size())
@@ -143,6 +130,26 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
         }
         collection.sort(Comparator.comparing(SaleProduct::getPrice));
         return collection;
+    }
+
+    @Subscribe
+    public void onAfterShow(AfterShowEvent event) {
+        User user = userSessionSource.getUserSession().getUser();
+        ExtUser u = (ExtUser) dataManager.reload(user, "user.edit");
+        if (Objects.isNull(u.getBuyer())) {
+            notifications.create(Notifications.NotificationType.WARNING)
+                    .withDescription("Отсутствует покупатель")
+                    .withPosition(Notifications.Position.MIDDLE_CENTER)
+                    .show();
+            this.closeWithDiscard();
+        }
+        if (soldProductsDc.getItems().isEmpty()) {
+            notifications.create(Notifications.NotificationType.WARNING)
+                    .withDescription("Отсутствуют товары")
+                    .withPosition(Notifications.Position.MIDDLE_CENTER)
+                    .show();
+            this.closeWithDiscard();
+        }
     }
 
     @Subscribe("saleProductsTable")
