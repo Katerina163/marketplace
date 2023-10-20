@@ -25,6 +25,7 @@ public class BuyProduct extends StandardEntity {
     @NotNull
     private BigDecimal price;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SOLD_PRODUCT_ID")
     private SoldProduct product;
