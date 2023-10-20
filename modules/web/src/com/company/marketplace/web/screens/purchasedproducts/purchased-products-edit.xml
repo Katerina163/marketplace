@@ -16,7 +16,7 @@
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="editActions" spacing="true">
+    <layout expand="editActions" spacing="true" margin="true">
         <form id="form" dataContainer="purchasedProductsDc">
             <column width="350px">
                 <pickerField id="shopField" property="shop" editable="false">

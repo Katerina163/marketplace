@@ -48,7 +48,7 @@
                                 <action id="clear" type="picker_clear"/>
                             </actions>
                         </pickerField>
-                        <textField id="quantityField" caption="msg://quantity"/>
+                        <textField id="quantityField" caption="msg://quantity" datatype="int" maxLength="10"/>
                     </column>
                 </form>
                 <hbox id="calcWithNumber" spacing="true">

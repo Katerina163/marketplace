@@ -27,7 +27,7 @@ public class ListShopBrowse extends StandardLookup<ListShop> {
     @Inject
     private PickerField<Product> productField;
     @Inject
-    private TextField<String> quantityField;
+    private TextField<Integer> quantityField;
     @Inject
     private PickerField<Shop> shopField;
     @Inject
@@ -56,7 +56,7 @@ public class ListShopBrowse extends StandardLookup<ListShop> {
 
     @Install(to = "soldProductsDl", target = Target.DATA_LOADER)
     private List<SoldProduct> soldProductsDlLoadDelegate(LoadContext<SoldProduct> loadContext) {
-        Long quantity = Objects.isNull(quantityField.getValue()) ? -1L : Integer.parseInt(quantityField.getValue());
+        Long quantity = Objects.isNull(quantityField.getValue()) ? -1L : quantityField.getValue();
         loadContext.getQuery().setParameter("quantity", quantity);
         loadContext.getQuery().setParameter("shop", shopField.getValue());
         loadContext.getQuery().setParameter("manufacturer", manufacturerField.getValue());

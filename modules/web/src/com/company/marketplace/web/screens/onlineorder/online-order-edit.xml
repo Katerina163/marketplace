@@ -72,7 +72,7 @@
                     <button id="closeBtn" action="windowClose"/>
                 </hbox>
             </tab>
-            <tab id="tab2" caption="msg://tab2" spacing="true">
+            <tab id="tab2" caption="msg://tab2" spacing="true" margin="true">
                 <table id="saleProductsTable" height="450px" width="100%" dataContainer="saleProductsDc">
                     <columns>
                         <column id="product"/>

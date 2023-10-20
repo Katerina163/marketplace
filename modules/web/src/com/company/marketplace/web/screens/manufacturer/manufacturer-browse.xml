@@ -70,11 +70,11 @@
                 <scrollBox id="fieldGroupBox">
                     <form id="form" dataContainer="manufacturerDc">
                         <column width="350px">
-                            <textField id="nameField" property="name"/>
-                            <textField id="addressCityField" property="address.city"/>
-                            <textField id="addressStreetField" property="address.street"/>
-                            <textField id="addressHouseField" property="address.house"/>
-                            <textField id="fullNameField" property="fullName"/>
+                            <textField id="nameField" property="name" maxLength="255"/>
+                            <textField id="addressCityField" property="address.city" maxLength="255"/>
+                            <textField id="addressStreetField" property="address.street" maxLength="255"/>
+                            <textField id="addressHouseField" property="address.house" maxLength="255"/>
+                            <textField id="fullNameField" property="fullName" maxLength="255"/>
                             <pickerField id="userField" property="user">
                                 <actions>
                                     <action id="lookup" type="picker_lookup"/>

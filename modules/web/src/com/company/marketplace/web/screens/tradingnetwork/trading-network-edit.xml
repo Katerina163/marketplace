@@ -28,8 +28,8 @@
                 <vbox spacing="true" margin="true">
                     <form id="form" dataContainer="tradingNetworkDc">
                         <column width="350px">
-                            <textField id="nameField" property="name"/>
-                            <textField id="fullNameField" property="fullName"/>
+                            <textField id="nameField" property="name" maxLength="255"/>
+                            <textField id="fullNameField" property="fullName" maxLength="255"/>
                         </column>
                     </form>
                     <hbox id="editActions" spacing="true">

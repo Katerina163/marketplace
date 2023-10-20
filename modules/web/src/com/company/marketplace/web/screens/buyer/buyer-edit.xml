@@ -12,12 +12,12 @@
     </data>
     <dialogMode height="600"
                 width="800"/>
-    <layout expand="editActions" spacing="true">
+    <layout expand="editActions" spacing="true" margin="true">
         <form id="form" dataContainer="buyerDc">
             <column width="350px">
-                <textField id="fullNameField" property="fullName"/>
-                <textField id="addressField" property="address"/>
-                <textField id="emailField" property="email"/>
+                <textField id="fullNameField" property="fullName" maxLength="255"/>
+                <textField id="addressField" property="address" maxLength="255"/>
+                <textField id="emailField" property="email" maxLength="255"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">
