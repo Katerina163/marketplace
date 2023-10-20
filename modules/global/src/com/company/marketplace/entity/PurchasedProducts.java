@@ -29,6 +29,7 @@ public class PurchasedProducts extends StandardEntity {
     @Column(name = "PRICE", nullable = false)
     private BigDecimal price;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "SOLD_PRODUCT_ID")
     private SoldProduct product;
