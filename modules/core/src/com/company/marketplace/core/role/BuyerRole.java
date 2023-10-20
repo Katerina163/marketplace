@@ -21,6 +21,8 @@ public class BuyerRole extends AnnotatedRoleDefinition {
             operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
     @EntityAccess(entityClass = SoldProduct.class,
             operations = {EntityOp.READ})
+    @EntityAccess(entityClass = ExtUser.class,
+            operations = {EntityOp.READ})
     @EntityAccess(entityClass = OnlineOrder.class,
             operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
     @EntityAccess(entityClass = BuyProduct.class,

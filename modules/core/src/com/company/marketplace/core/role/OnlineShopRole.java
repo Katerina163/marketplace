@@ -29,6 +29,8 @@ public class OnlineShopRole extends AnnotatedRoleDefinition {
             operations = {EntityOp.READ})
     @EntityAccess(entityClass = Product.class,
             operations = {EntityOp.READ})
+    @EntityAccess(entityClass = ExtUser.class,
+            operations = {EntityOp.READ})
     @EntityAccess(entityClass = StatisticTradingNetwork.class,
             operations = {EntityOp.CREATE, EntityOp.READ, EntityOp.UPDATE, EntityOp.DELETE})
     @EntityAccess(entityClass = OnlineOrder.class,

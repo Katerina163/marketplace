@@ -1,6 +1,7 @@
 package com.company.marketplace.core.group;
 
 import com.company.marketplace.entity.Basket;
+import com.company.marketplace.entity.OnlineOrder;
 import com.haulmont.cuba.security.app.group.AnnotatedAccessGroupDefinition;
 import com.haulmont.cuba.security.app.group.annotation.AccessGroup;
 import com.haulmont.cuba.security.app.group.annotation.JpqlConstraint;
@@ -11,6 +12,7 @@ public class BuyerGroup extends AnnotatedAccessGroupDefinition {
     public final static String NAME = "Покупатель";
 
     @JpqlConstraint(target = Basket.class, where = "{E}.user.id = :session$userId")
+    @JpqlConstraint(target = OnlineOrder.class, where = "{E}.buyer.id = :session$buyerId")
     @Override
     public ConstraintsContainer accessConstraints() {
         return super.accessConstraints();
