@@ -21,8 +21,8 @@ public class BuyProduct extends StandardEntity {
     @Positive
     private Integer quantity;
 
-    @Column(name = "PRICE")
     @NotNull
+    @Column(name = "PRICE")
     private BigDecimal price;
 
     @NotNull
@@ -30,9 +30,9 @@ public class BuyProduct extends StandardEntity {
     @JoinColumn(name = "SOLD_PRODUCT_ID")
     private SoldProduct product;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ONLINE_ORDER_ID")
-    @NotNull
     private OnlineOrder onlineOrder;
 
     public void setQuantity(Integer quantity) {

@@ -5,6 +5,7 @@ import com.haulmont.cuba.core.entity.StandardEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 @Table(name = "MARKETPLACE_BUYER")
 @Entity(name = "marketplace_Buyer")
@@ -18,9 +19,11 @@ public class Buyer extends StandardEntity {
     @Column(name = "FULL_NAME")
     private String fullName;
 
+    @NotNull
     @Column(name = "ADDRESS")
     private String address;
 
+    @NotNull
     @Column(name = "EMAIL")
     @Email
     private String email;

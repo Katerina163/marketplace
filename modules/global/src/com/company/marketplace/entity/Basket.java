@@ -28,9 +28,9 @@ public class Basket extends StandardEntity {
     @OneToMany(mappedBy = "basket")
     private List<PurchasedProducts> products;
 
+    @NotNull
     @OneToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "USER_ID")
-    @NotNull
     private User user;
 
     @NotNull

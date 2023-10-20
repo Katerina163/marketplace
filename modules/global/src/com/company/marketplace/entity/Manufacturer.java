@@ -30,6 +30,7 @@ public class Manufacturer extends StandardEntity {
     @Column(name = "FULL_NAME")
     private String fullName;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "USER_ID")
     private User user;

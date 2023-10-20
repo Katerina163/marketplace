@@ -21,6 +21,7 @@ public class PurchasedProducts extends StandardEntity {
     @JoinColumn(name = "SHOP_ID")
     private Shop shop;
 
+    @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BASKET_ID")
     private Basket basket;

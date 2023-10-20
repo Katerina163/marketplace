@@ -20,6 +20,7 @@ import java.util.List;
 public class OnlineOrder extends StandardEntity {
     private static final long serialVersionUID = -9093884912635372877L;
 
+    @NotNull
     @OnDeleteInverse(DeletePolicy.CASCADE)
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "BUYER_ID")
@@ -35,9 +36,9 @@ public class OnlineOrder extends StandardEntity {
     @Positive
     private BigDecimal amount;
 
-    @Column(name = "DISCOUNT")
-    @PositiveOrZero
     @NotNull
+    @PositiveOrZero
+    @Column(name = "DISCOUNT")
     private Integer discount;
 
     @NotNull
