@@ -20,10 +20,7 @@ import javax.inject.Inject;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Predicate;
 
@@ -113,23 +110,26 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
     private List<SaleProduct> saleProductsDlLoadDelegate(LoadContext<SaleProduct> loadContext) {
         soldProductsDl.load();
         List<SoldProduct> soldProducts = soldProductsDc.getItems();
-        int sizeSaleProducts = ThreadLocalRandom.current().nextInt(soldProducts.size());
-        int[] indexSoldProduct = ThreadLocalRandom.current()
-                .ints(0, soldProducts.size())
-                .distinct()
-                .limit(sizeSaleProducts)
-                .toArray();
-        int sale = LocalDate.now().getDayOfMonth();
-        List<SaleProduct> collection = new ArrayList<>(sizeSaleProducts);
-        for (int i = 0; i < sizeSaleProducts; i++) {
-            SoldProduct product = soldProducts.get(indexSoldProduct[i]);
-            SaleProduct ap = new SaleProduct();
-            ap.setProduct(product);
-            ap.setPrice(BigDecimal.valueOf(product.getPrice().longValue() * (100 - sale) / 100));
-            collection.add(ap);
+        if (!soldProducts.isEmpty()) {
+            int sizeSaleProducts = ThreadLocalRandom.current().nextInt(soldProducts.size());
+            int[] indexSoldProduct = ThreadLocalRandom.current()
+                    .ints(0, soldProducts.size())
+                    .distinct()
+                    .limit(sizeSaleProducts)
+                    .toArray();
+            int sale = LocalDate.now().getDayOfMonth();
+            List<SaleProduct> collection = new ArrayList<>(sizeSaleProducts);
+            for (int i = 0; i < sizeSaleProducts; i++) {
+                SoldProduct product = soldProducts.get(indexSoldProduct[i]);
+                SaleProduct ap = new SaleProduct();
+                ap.setProduct(product);
+                ap.setPrice(BigDecimal.valueOf(product.getPrice().longValue() * (100 - sale) / 100));
+                collection.add(ap);
+            }
+            collection.sort(Comparator.comparing(SaleProduct::getPrice));
+            return collection;
         }
-        collection.sort(Comparator.comparing(SaleProduct::getPrice));
-        return collection;
+        return Collections.EMPTY_LIST;
     }
 
     @Subscribe

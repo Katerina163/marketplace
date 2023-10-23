@@ -29,6 +29,8 @@ public class OnlineShopRole extends AnnotatedRoleDefinition {
             operations = {EntityOp.READ})
     @EntityAccess(entityClass = Product.class,
             operations = {EntityOp.READ})
+    @EntityAccess(entityClass = SaleProduct.class,
+            operations = {EntityOp.READ})
     @EntityAccess(entityClass = ExtUser.class,
             operations = {EntityOp.READ})
     @EntityAccess(entityClass = StatisticTradingNetwork.class,
@@ -53,6 +55,7 @@ public class OnlineShopRole extends AnnotatedRoleDefinition {
     @EntityAttributeAccess(entityClass = StatisticTradingNetwork.class, modify = "*")
     @EntityAttributeAccess(entityClass = OnlineOrder.class, modify = "*")
     @EntityAttributeAccess(entityClass = BuyProduct.class, modify = "*")
+    @EntityAttributeAccess(entityClass = SaleProduct.class, view = "*")
     @Override
     public EntityAttributePermissionsContainer entityAttributePermissions() {
         return super.entityAttributePermissions();
@@ -65,6 +68,7 @@ public class OnlineShopRole extends AnnotatedRoleDefinition {
             "marketplace_PriceHistory.browse", "marketplace_StatisticShop.edit",
             "marketplace_OnlineOrder.browse", "marketplace_OnlineOrder.edit",
             "marketplace_BuyProduct.browse", "marketplace_BuyProduct.edit",
+            "marketplace_BuyProductForSale.edit",
             "marketplace_Product.browse"})
     @Override
     public ScreenPermissionsContainer screenPermissions() {
