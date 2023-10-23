@@ -12,7 +12,8 @@ public class BuyerGroup extends AnnotatedAccessGroupDefinition {
     public final static String NAME = "Покупатель";
 
     @JpqlConstraint(target = Basket.class, where = "{E}.user.id = :session$userId")
-    @JpqlConstraint(target = OnlineOrder.class, where = "{E}.buyer.id = :session$buyerId")
+    @JpqlConstraint(target = OnlineOrder.class,
+            where = "{E}.buyer.id = (select s.buyer.id from marketplace_ExtUser s where s.id = :session$userId)")
     @Override
     public ConstraintsContainer accessConstraints() {
         return super.accessConstraints();
