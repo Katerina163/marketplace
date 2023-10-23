@@ -9,6 +9,8 @@ import com.haulmont.cuba.core.app.events.EntityChangedEvent;
 import com.haulmont.cuba.core.app.events.EntityPersistingEvent;
 import com.haulmont.cuba.core.entity.contracts.Id;
 import com.haulmont.cuba.core.global.DataManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.event.TransactionPhase;
@@ -20,6 +22,7 @@ import java.util.UUID;
 
 @Component("marketplace_ChangedProductsListener")
 public class ChangedProductsListener {
+    private static Logger log = LoggerFactory.getLogger(ChangedProductsListener.class);
     @Inject
     private DataManager dataManager;
     @Inject
@@ -59,10 +62,14 @@ public class ChangedProductsListener {
 
     private void changeQuantityDeleted(AttributeChanges changes) {
         Id<SoldProduct, UUID> id = changes.getOldValue("product");
-        SoldProduct product = tdm.load(id).one();
-        Integer quantity = changes.getOldValue("quantity");
-        product.setQuantity(product.getQuantity() + quantity);
-        tdm.save(product);
+        try {
+            SoldProduct product = tdm.load(id).one();
+            Integer quantity = changes.getOldValue("quantity");
+            product.setQuantity(product.getQuantity() + quantity);
+            tdm.save(product);
+        } catch (IllegalStateException ex) {
+            log.warn("Ошибка загрузки {} с {}", id.getEntityClass(), id.getValue());
+        }
     }
 
     @TransactionalEventListener(phase = TransactionPhase.BEFORE_COMMIT)
