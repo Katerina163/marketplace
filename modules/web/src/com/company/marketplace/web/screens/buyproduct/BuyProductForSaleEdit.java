@@ -1,10 +1,10 @@
 package com.company.marketplace.web.screens.buyproduct;
 
+import com.company.marketplace.entity.BuyProduct;
 import com.company.marketplace.service.BuyProductService;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.ValidationErrors;
 import com.haulmont.cuba.gui.screen.*;
-import com.company.marketplace.entity.BuyProduct;
 
 import javax.inject.Inject;
 
@@ -24,7 +24,7 @@ public class BuyProductForSaleEdit extends StandardEditor<BuyProduct> {
             errors.add("Товар дублируется");
             commitAndCloseBtn.setEnabled(false);
         }
-        if (buyProductService.checkingQuantityProducts(getEditedEntity())) {
+        if (!buyProductService.checkingQuantityProducts(getEditedEntity())) {
             errors.add("Товар закончился");
         }
         super.validateAdditionalRules(errors);
