@@ -174,4 +174,12 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
         });
         screen.show();
     }
+
+    @Subscribe
+    public void onBeforeCommitChanges(BeforeCommitChangesEvent event) {
+        if (Objects.isNull(getEditedEntity().getProducts()) || getEditedEntity().getProducts().isEmpty()) {
+            event.preventCommit();
+            this.closeWithDiscard();
+        }
+    }
 }
