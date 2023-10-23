@@ -23,7 +23,7 @@ public class PurchasedProductsServiceBean implements PurchasedProductsService {
         }
         for (PurchasedProducts sp : product.getBasket().getProducts()) {
             if (sp.getProduct().equals(product.getProduct())) {
-                return true;
+                return !sp.equals(product);
             }
         }
         return false;

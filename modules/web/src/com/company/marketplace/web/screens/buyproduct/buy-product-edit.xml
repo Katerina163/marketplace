@@ -7,7 +7,7 @@
         <instance id="buyProductDc"
                   class="com.company.marketplace.entity.BuyProduct">
             <view extends="_local">
-                <property name="product" view="_minimal"/>
+                <property name="product" view="view-soldProduct-with-product"/>
             </view>
             <loader/>
         </instance>

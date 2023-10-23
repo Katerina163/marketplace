@@ -28,4 +28,25 @@ public class BuyProductServiceBean implements BuyProductService {
                 && Objects.equals(p1.getProduct(), p2.getProduct())
                 && Objects.equals(p1.getOnlineOrder(), p2.getOnlineOrder());
     }
+
+    @Override
+    public boolean checkingDoubleProducts(BuyProduct product) {
+        if (Objects.isNull(product.getOnlineOrder().getProducts())) {
+            return false;
+        }
+        for (BuyProduct sp : product.getOnlineOrder().getProducts()) {
+            if (sp.getProduct().equals(product.getProduct()) && sp.getPrice().equals(product.getPrice())) {
+                return !sp.equals(product);
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean checkingQuantityProducts(BuyProduct product) {
+        if (Objects.isNull(product.getProduct())) {
+            return false;
+        }
+        return product.getProduct().getQuantity() >= product.getQuantity();
+    }
 }
