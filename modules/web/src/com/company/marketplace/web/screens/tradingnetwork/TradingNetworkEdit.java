@@ -9,6 +9,7 @@ import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;
 import com.haulmont.cuba.gui.components.HasValue;
 import com.haulmont.cuba.gui.components.PickerField;
+import com.haulmont.cuba.gui.components.VBoxLayout;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
 import org.locationtech.jts.geom.Point;
@@ -33,6 +34,10 @@ public class TradingNetworkEdit extends StandardEditor<TradingNetwork> {
     private PieChart pieChart;
     @Inject
     private PickerField<Product> productField;
+    @Inject
+    private VBoxLayout tabWithPieChart;
+    @Inject
+    private VBoxLayout tabWithMap;
 
     @Subscribe
     public void onAfterShow(AfterShowEvent event) {
@@ -47,7 +52,8 @@ public class TradingNetworkEdit extends StandardEditor<TradingNetwork> {
                 }
             }
         } else {
-            map.setVisible(false);
+            tabWithMap.setVisible(false);
+            tabWithPieChart.setVisible(false);
         }
     }
 
