@@ -24,6 +24,9 @@ public class BuyProductForSaleEdit extends StandardEditor<BuyProduct> {
             errors.add("Товар дублируется");
             commitAndCloseBtn.setEnabled(false);
         }
+        if (buyProductService.checkingQuantityProducts(getEditedEntity())) {
+            errors.add("Товар закончился");
+        }
         super.validateAdditionalRules(errors);
     }
 }
