@@ -23,7 +23,7 @@
                         <action id="clear" type="picker_clear"/>
                     </actions>
                 </pickerField>
-                <textField id="quantityField" property="quantity" editable="false" datatype="int" maxLength="10"/>
+                <textField id="quantityField" property="quantity" editable="false" datatype="int"/>
                 <textField id="priceField" property="price" editable="false" datatype="decimal"/>
             </column>
         </form>

@@ -38,7 +38,7 @@
                     </actions>
                 </pickerField>
                 <textField id="priceField" property="price" editable="false"/>
-                <textField id="quantityField" property="quantity"/>
+                <textField id="quantityField" property="quantity" datatype="int"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

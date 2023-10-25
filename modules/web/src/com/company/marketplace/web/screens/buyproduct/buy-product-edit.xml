@@ -24,7 +24,11 @@
                     </actions>
                 </pickerField>
                 <textField id="quantityField" property="quantity" datatype="int" maxLength="10"/>
-                <textField id="priceField" property="price" editable="false" datatype="decimal"/>
+                <textField id="priceField" property="price" editable="false" datatype="decimal">
+                    <validators>
+                        <decimalMax value="99999999999999999"/>
+                    </validators>
+                </textField>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

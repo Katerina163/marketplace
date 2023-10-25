@@ -42,11 +42,13 @@ public class BuyProductEdit extends StandardEditor<BuyProduct> {
 
     @Override
     protected void validateAdditionalRules(ValidationErrors errors) {
-        if (Objects.isNull(getEditedEntity().getVersion()) && buyProductService.checkingDoubleProducts(getEditedEntity())) {
-            errors.add("Товар дублируется");
-        }
-        if (getEditedEntity().getQuantity() == 0 || !buyProductService.checkingQuantityProducts(getEditedEntity())) {
-            errors.add("Неправильное количество товара");
+        if (Objects.nonNull(getEditedEntity().getQuantity())) {
+            if (Objects.isNull(getEditedEntity().getVersion()) && buyProductService.checkingDoubleProducts(getEditedEntity())) {
+                errors.add("Товар дублируется");
+            }
+            if (getEditedEntity().getQuantity() == 0 || !buyProductService.checkingQuantityProducts(getEditedEntity())) {
+                errors.add("Неправильное количество товара");
+            }
         }
         super.validateAdditionalRules(errors);
     }

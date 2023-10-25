@@ -24,7 +24,11 @@
                         <action id="clear" type="picker_clear"/>
                     </actions>
                 </pickerField>
-                <textField id="priceField" property="price" datatype="decimal"/>
+                <textField id="priceField" property="price" datatype="decimal">
+                    <validators>
+                        <decimalMax value="99999999999999999"/>
+                    </validators>
+                </textField>
                 <textField id="quantityField" property="quantity" datatype="int" maxLength="10"/>
                 <pickerField id="shopField" property="shop" enable="false" visible="false">
                     <actions>

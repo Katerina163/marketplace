@@ -47,6 +47,14 @@ public class ShopEdit extends StandardEditor<Shop> {
 
     @Override
     protected void validateAdditionalRules(ValidationErrors errors) {
+        try {
+            if (Objects.nonNull(getEditedEntity().getNumber())
+                    && Integer.parseInt(getEditedEntity().getNumber()) <= 0) {
+                errors.add("Неправильный номер");
+            }
+        } catch (NumberFormatException ex) {
+            errors.add("Номер должен состоять из цифр");
+        }
         if (!shopService.checkGeocoordinates(getEditedEntity())) {
             errors.add("Неправильный адрес");
         }
