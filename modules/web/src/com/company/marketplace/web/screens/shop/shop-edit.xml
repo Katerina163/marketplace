@@ -72,6 +72,10 @@
                         </buttonsPanel>
                     </table>
                 </groupBox>
+                <hbox id="editAfterTableActions" spacing="true">
+                    <button id="commitAndCloseAfterTableBtn" action="windowCommitAndClose"/>
+                    <button id="closeAfterTableBtn" action="windowClose"/>
+                </hbox>
             </tab>
         </tabSheet>
     </layout>

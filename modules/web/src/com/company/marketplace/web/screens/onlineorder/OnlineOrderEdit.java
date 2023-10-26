@@ -144,8 +144,7 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
                     .withPosition(Notifications.Position.MIDDLE_CENTER)
                     .show();
             this.closeWithDiscard();
-        }
-        if (soldProductsDc.getItems().isEmpty()) {
+        } else if (soldProductsDc.getItems().isEmpty()) {
             notifications.create(Notifications.NotificationType.WARNING)
                     .withDescription("Отсутствуют товары")
                     .withPosition(Notifications.Position.MIDDLE_CENTER)

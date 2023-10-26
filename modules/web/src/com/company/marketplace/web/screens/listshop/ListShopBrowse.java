@@ -3,6 +3,7 @@ package com.company.marketplace.web.screens.listshop;
 import com.company.marketplace.entity.*;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;
+import com.haulmont.cuba.gui.Notifications;
 import com.haulmont.cuba.gui.components.Button;
 import com.haulmont.cuba.gui.components.PickerField;
 import com.haulmont.cuba.gui.components.TextField;
@@ -32,6 +33,8 @@ public class ListShopBrowse extends StandardLookup<ListShop> {
     private PickerField<Shop> shopField;
     @Inject
     private CollectionLoader<Shop> shopsDl;
+    @Inject
+    private Notifications notifications;
 
     @Subscribe
     public void onInit(InitEvent event) {
@@ -41,12 +44,28 @@ public class ListShopBrowse extends StandardLookup<ListShop> {
 
     @Subscribe("calculateWithNumberBtn")
     public void onCalculateWithNumberBtnClick(Button.ClickEvent event) {
+        if (Objects.isNull(manufacturerField.getValue())
+                || Objects.isNull(shopField.getValue())
+                || Objects.isNull(quantityField.getValue())) {
+            notifications.create(Notifications.NotificationType.HUMANIZED)
+                    .withDescription("Заполните все поля")
+                    .withPosition(Notifications.Position.BOTTOM_RIGHT)
+                    .withCaption("Внимание")
+                    .show();
+        } else {
             soldProductsDl.load();
+        }
     }
 
     @Subscribe("calculateWithoutProductBtn")
     public void onCalculateWithoutProductBtnClick(Button.ClickEvent event) {
-        if (Objects.nonNull(productField.getValue())) {
+        if (Objects.isNull(productField.getValue())) {
+            notifications.create(Notifications.NotificationType.HUMANIZED)
+                    .withDescription("Заполните поле \"Продукт\"")
+                    .withPosition(Notifications.Position.BOTTOM_RIGHT)
+                    .withCaption("Внимание")
+                    .show();
+        } else {
             shopsDl.setQuery("select e from marketplace_Shop e where e.products <> ALL "
                     + "(select s from marketplace_SoldProduct s where s.product = :product)");
             shopsDl.setParameter("product", productField.getValue());
