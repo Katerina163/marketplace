@@ -11,6 +11,7 @@ import com.haulmont.cuba.gui.ScreenBuilders;
 import com.haulmont.cuba.gui.components.HasValue;
 import com.haulmont.cuba.gui.components.Table;
 import com.haulmont.cuba.gui.components.TextField;
+import com.haulmont.cuba.gui.components.ValidationErrors;
 import com.haulmont.cuba.gui.model.CollectionContainer;
 import com.haulmont.cuba.gui.model.CollectionLoader;
 import com.haulmont.cuba.gui.screen.*;
@@ -182,5 +183,13 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
             event.preventCommit();
             this.closeWithDiscard();
         }
+    }
+
+    @Override
+    protected void validateAdditionalRules(ValidationErrors errors) {
+        if (amountField.getValue().compareTo(BigDecimal.valueOf(99_999_999_999_999_999L)) > 0) {
+            errors.add("Слишком большая итоговая сумма");
+        }
+        super.validateAdditionalRules(errors);
     }
 }
