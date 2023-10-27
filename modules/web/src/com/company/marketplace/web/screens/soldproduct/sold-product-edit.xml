@@ -30,6 +30,7 @@
                     </validators>
                 </textField>
                 <textField id="quantityField" property="quantity" datatype="int" maxLength="10"/>
+                <textField id="minField" property="min" datatype="int" maxLength="10"/>
                 <pickerField id="shopField" property="shop" enable="false" visible="false">
                     <actions>
                         <action id="lookup" type="picker_lookup"/>

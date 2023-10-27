@@ -36,6 +36,19 @@ public class SoldProduct extends StandardEntity {
     @JoinColumn(name = "SHOP_ID")
     private Shop shop;
 
+    @NotNull
+    @Positive
+    @Column(name = "MINIM")
+    private Integer min;
+
+    public Integer getMin() {
+        return min;
+    }
+
+    public void setMin(Integer min) {
+        this.min = min;
+    }
+
     public Shop getShop() {
         return shop;
     }

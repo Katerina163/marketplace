@@ -10,6 +10,7 @@
                 <property name="products" view="_minimal">
                     <property name="price"/>
                     <property name="quantity"/>
+                    <property name="min"/>
                 </property>
                 <property name="address" view="_minimal">
                     <property name="city"/>
@@ -64,6 +65,7 @@
                             <column id="product"/>
                             <column id="price"/>
                             <column id="quantity"/>
+                            <column id="min"/>
                         </columns>
                         <buttonsPanel>
                             <button action="productsTable.create"/>

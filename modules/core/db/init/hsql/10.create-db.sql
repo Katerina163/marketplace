@@ -13,6 +13,7 @@ create table MARKETPLACE_SOLD_PRODUCT (
     PRICE decimal(19, 2) not null,
     QUANTITY integer not null,
     SHOP_ID varchar(36) not null,
+    MINIM integer,
     --
     primary key (ID)
 )^

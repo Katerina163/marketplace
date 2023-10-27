@@ -4,7 +4,11 @@ import com.company.marketplace.config.ColorConfig;
 import com.company.marketplace.entity.Shop;
 import com.company.marketplace.entity.SoldProduct;
 import com.company.marketplace.service.ShopService;
-import com.haulmont.cuba.gui.components.*;
+import com.haulmont.cuba.core.app.LockService;
+import com.haulmont.cuba.gui.components.Button;
+import com.haulmont.cuba.gui.components.Table;
+import com.haulmont.cuba.gui.components.TextField;
+import com.haulmont.cuba.gui.components.ValidationErrors;
 import com.haulmont.cuba.gui.screen.*;
 
 import javax.inject.Inject;
@@ -23,10 +27,21 @@ public class ShopEdit extends StandardEditor<Shop> {
     private Table<SoldProduct> productsTable;
     @Inject
     private ShopService shopService;
+    @Inject
+    private LockService lockService;
 
     @Subscribe
     public void onInit(InitEvent event) {
         colorPrice.setValue(colorConfig.getProductPrice());
+    }
+
+    @Subscribe
+    public void onAfterShow(AfterShowEvent event) {
+        if (shopService.checkContainsMinQuantityProduct(getEditedEntity())) {
+            lockService.lock(getEditedEntity());
+        } else {
+            lockService.unlock(getEditedEntity());
+        }
     }
 
     @Subscribe("colorPriceBtn")

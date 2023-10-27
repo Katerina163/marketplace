@@ -6,4 +6,6 @@ public interface ShopService {
     String NAME = "marketplace_ShopService";
 
     boolean checkGeocoordinates(Shop shop);
+
+    boolean checkContainsMinQuantityProduct(Shop shop);
 }
