@@ -17,6 +17,8 @@
                 <entry key="marketplace_StatisticService" value="com.company.marketplace.service.StatisticService"/>
                 <entry key="marketplace_ShopService" value="com.company.marketplace.service.ShopService"/>
                 <entry key="marketplace_BuyProductService" value="com.company.marketplace.service.BuyProductService"/>
+                <entry key="marketplace_BuyRestService" value="com.company.marketplace.service.BuyRestService"/>
+                <entry key="marketplace_OnlineOrderService" value="com.company.marketplace.service.OnlineOrderService"/>
             </map>
         </property>
     </bean>

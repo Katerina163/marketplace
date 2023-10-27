@@ -8,6 +8,9 @@
         <class>com.company.marketplace.entity.ListProduct</class>
         <class>com.company.marketplace.entity.SaleProduct</class>
         <class>com.company.marketplace.entity.ChartShop</class>
+        <class>com.company.marketplace.entity.SoldProductDTO</class>
+        <class>com.company.marketplace.entity.BuyProductEntity</class>
+        <class>com.company.marketplace.entity.BuyProductDTO</class>
     </metadata-model>
 
 </metadata>

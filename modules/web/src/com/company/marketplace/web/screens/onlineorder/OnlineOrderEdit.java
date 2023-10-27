@@ -1,6 +1,7 @@
 package com.company.marketplace.web.screens.onlineorder;
 
 import com.company.marketplace.entity.*;
+import com.company.marketplace.service.OnlineOrderService;
 import com.haulmont.cuba.core.app.UniqueNumbersService;
 import com.haulmont.cuba.core.global.DataManager;
 import com.haulmont.cuba.core.global.LoadContext;
@@ -19,11 +20,9 @@ import com.haulmont.cuba.security.entity.User;
 
 import javax.inject.Inject;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
-import java.util.function.Predicate;
 
 @UiController("marketplace_OnlineOrder.edit")
 @UiDescriptor("online-order-edit.xml")
@@ -50,6 +49,8 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
     private DataManager dataManager;
     @Inject
     private Notifications notifications;
+    @Inject
+    private OnlineOrderService onlineOrderService;
 
     @Subscribe
     public void onInitEntity(InitEntityEvent<OnlineOrder> event) {
@@ -88,25 +89,10 @@ public class OnlineOrderEdit extends StandardEditor<OnlineOrder> {
 
     private void calculateAmountWithSale() {
         if (Objects.nonNull(getEditedEntity().getProducts())) {
-            Integer sale = discountField.getValue();
-            BigDecimal amount = calculateAmount(buyProduct -> buyProduct.getPrice().equals(buyProduct.getProduct().getPrice()));
-            if (sale != 0) {
-                amount = amount.multiply(BigDecimal.valueOf(100 - sale))
-                        .divide(BigDecimal.valueOf(100), RoundingMode.DOWN);
-            }
-            BigDecimal amountWithSale = calculateAmount(buyProduct ->
-                    !buyProduct.getPrice().equals(buyProduct.getProduct().getPrice()));
-            getEditedEntity().setAmount(amount.add(amountWithSale));
-            amountField.setValue(amount.add(amountWithSale));
+            BigDecimal amount = onlineOrderService.calculateAmount(getEditedEntity());
+            getEditedEntity().setAmount(amount);
+            amountField.setValue(amount);
         }
-    }
-
-    private BigDecimal calculateAmount(Predicate<BuyProduct> predicate) {
-        return getEditedEntity().getProducts().stream()
-                .filter(predicate)
-                .map(buyProduct -> buyProduct.getPrice()
-                        .multiply(BigDecimal.valueOf(buyProduct.getQuantity())))
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     @Install(to = "saleProductsDl", target = Target.DATA_LOADER)

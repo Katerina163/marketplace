@@ -8,6 +8,7 @@ public enum OrderStatus implements EnumClass<String> {
 
     PROCESSING("In processing"),
     DELIVERY("In delivery"),
+    CANCELED("Canceled"),
     DELIVERED("Delivered");
 
     private final String id;

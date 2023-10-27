@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<services xmlns="http://schemas.haulmont.com/cuba/rest-services-v2.xsd">
+    <service name="marketplace_BuyRestService">
+        <method name="getAvailableProduct"/>
+        <method name="createBuyer">
+            <param name="buyer"/>
+        </method>
+        <method name="createOrder">
+            <param name="buyer"/>
+            <param name="products"/>
+            <param name="discount"/>
+        </method>
+        <method name="cancelOrder">
+            <param name="orderId"/>
+        </method>
+    </service>
+</services>
+
