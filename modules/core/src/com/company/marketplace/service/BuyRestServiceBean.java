@@ -63,7 +63,7 @@ public class BuyRestServiceBean implements BuyRestService {
         OnlineOrder order;
         try (Transaction tx = persistence.createTransaction()) {
             EntityManager em = persistence.getEntityManager();
-            order = dataManager.create(OnlineOrder.class);
+            order = new OnlineOrder();
             order.setBuyer(buyer);
             order.setStatus(OrderStatus.PROCESSING);
             order.setProducts(products
@@ -82,6 +82,7 @@ public class BuyRestServiceBean implements BuyRestService {
             order.setStatus(OrderStatus.PROCESSING);
             order.setNumber(String.valueOf(uniqueNumbersService.getNextNumber("sequenceForOnlineOrder")));
             order.setAmount(onlineOrderService.calculateAmount(order));
+            em.persist(order);
             tx.commit();
         }
         return order;

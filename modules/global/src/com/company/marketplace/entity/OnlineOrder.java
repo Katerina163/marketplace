@@ -30,7 +30,7 @@ public class OnlineOrder extends StandardEntity {
 
     @Composition
     @OnDelete(DeletePolicy.CASCADE)
-    @OneToMany(mappedBy = "onlineOrder")
+    @OneToMany(mappedBy = "onlineOrder", cascade = CascadeType.ALL)
     private List<BuyProduct> products;
 
     @NotNull
