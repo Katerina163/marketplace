@@ -242,3 +242,14 @@ task restart(dependsOn: ['stop', ":${modulePrefix}-core:deploy", ":${modulePrefi
 }
 restart.finalizedBy start
 
+task buildUberJar(type: CubaUberJarBuilding) {
+    logbackConfigurationFile = 'etc/uber-jar-logback.xml'
+    singleJar = true
+    appProperties = ['cuba.automaticDatabaseUpdate': true,
+                     'cuba.dataSource.username'    : 'postgres',
+                     'cuba.dataSource.password'    : 'password',
+                     'cuba.dataSource.dbName'      : 'marketplace-603331',
+                     'cuba.dataSource.host'        : 'postgres',
+                     'cuba.dataSource.port'        : '',
+                     'cuba.dataSourceProvider'     : 'application']
+}
